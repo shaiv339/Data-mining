@@ -1,0 +1,2701 @@
+ass-1
+1.Define an Employee class (name, position, salary). Define a default and parameterized constructor. Override the toString method. Keep a count of objects created. Create objects using parameterized constructor and display the object count after each object is created. (Use static member and method). Also display the contents of each object.
+
+import java.io.*;
+class Employee
+{
+   String name;
+   String position;
+   double salary;
+   static int cnt=0;
+ 
+  Employee ()
+  {
+  this.name=null;
+  this.position=null;
+  this.salary=0;
+  }
+ 
+  Employee(String n, String p, double s)
+  {
+    name=n;
+    position=p;
+    salary=s;
+    count();
+  }
+ 
+
+ static void count()
+ {
+   cnt++;
+   System.out.println("\n objects "+cnt+"created");
+ }
+ 
+ public String toString ()
+ {
+   return "Employee name : "+ name + " ,Position : " +position + " , Salary : " +salary;
+ }
+}
+
+class mainEmp
+
+ {
+   public static void main (String args[]) throws IOException
+ {
+     int i;
+     InputStreamReader in = new
+     InputStreamReader(System.in);
+ 
+     BufferedReader br = new BufferedReader(in);
+
+     String name,position;
+     double salary;
+     System.out.println ("Enter how many employee : ");
+
+     int no = Integer.parseInt(br.readLine());
+
+     Employee e[] = new Employee[no];
+     System.out.println("Enter employee Details:");
+     for( i=0;i<no;i++);
+      
+  {
+     System.out.println("Enter the name of the employee : ");
+     name = br.readLine();
+
+     System.out.println("Enter Position:");
+     position = br.readLine();
+ 
+     System.out.println("Enter Salary:");
+     while(true)
+     {
+
+           salary = Double.parseDouble(br.readLine());
+                      if(salary>0)
+                         break;
+	              else
+	                 System.out.println("\n Invalid Input");
+     }
+
+        e[i]= new Employee(name,position,salary);
+        }
+        for( i=0;i<no;i++)
+        {
+           System.out.println (""+e[i]);
+        }
+   }
+
+
+}
+
+
+2.Define a class MyNumber having one private int data member. Write a default constructor to
+initialize it to 0 and another constructor to initialize it to a value pass by user (Use this). Write methods to check whether this data member is Negative, Positive, Zero, Odd or Even. Create an object in main. Use command line arguments to pass a value to the object (Hint: convert string argument to integer) and perform the above checking.
+
+
+class Mynumber
+ {
+     private int data;
+
+       Mynumber ()
+         {
+          data=0;
+         }
+       
+      Mynumber (int d)
+         {
+          this.data=d;
+ 	 }
+          public void check()
+         {
+ 
+            if(data==0)
+             {
+               System.out.println("Zero !!");
+             }
+	   else
+             {
+               if(data<0)
+	     {
+               System.out.println("Negative");
+	     }
+           else
+             {
+               System.out.println("Positive");
+	     }
+          if(data%2==0)
+             {
+	       System.out.println("Even");
+             }
+	 else 
+          {
+            System.out.println("Odd");
+          }
+      }
+ }
+
+  public static void main (String args[])
+  {
+     int n = Integer.parseInt(args[0]);
+     Mynumber ob= new Mynumber(n);
+
+     ob.check();
+  }
+}
+
+
+3.. Define a Student class (roll number, name, percentage). Define a default and parameterized constructor. create n objects of the Student class. Accept details from the user for each object.
+Define a static method "sortStudent" which sorts all data on the basis of percentage.
+
+import java.io.*;
+class Student
+{
+   static int roll=0;
+   String name;
+   float percentage;
+   int r;
+ 
+    Student ()
+  {}
+
+  Student (String name,float percentage)
+    {
+      this.name= name;
+      this.percentage=percentage;
+      roll=roll+1;
+      r=roll;
+ 
+    }
+ 
+  static void sort (Student s[],int n)
+         {
+            for(int i=0;i<n;i++)
+	 {
+	    for(int j=0;j<n-1;j++)
+	 {
+	    if(s[j].percentage < s[j+1].percentage)
+	 {
+
+
+      Student temp=new Student();
+      temp=s[j];
+      s[j]=s[j+1];
+      s[j+1]=temp;
+      }
+    }
+ }
+}
+  void display()
+  {
+     System.out.println("Roll :-->"+r);
+     System.out.println("Name :-->"+name);
+     System.out.println("Percentage:-->"+percentage);
+  }
+}
+
+  class ass1a3
+  {
+    public static void main(String args[]) throws IOException
+    {
+      BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+
+       String name;
+       float percentage;
+       
+             System.out.println("Enter how many students : ");
+             int n = Integer.parseInt(br.readLine());
+	     Student[] s=new Student[n];
+
+         for(int i=0;i<n;i++)
+         {
+	   System.out.println("Enter roll" +(Student.roll +1));
+           System.out.println("Enter name : ");
+           name = br.readLine();
+           System.out.println("Enter percentage : ");
+           while(true)
+
+             {
+	        percentage = Float.parseFloat(br.readLine());
+
+                if(percentage>0)
+                  break;
+                else
+                  System.out.println("Invalid Input");
+             }
+
+
+              s[i]=new Student(name, percentage);
+             }
+              Student.sort(s, n);
+              for(int i=0;i<n;i++)
+                {
+               s[i].display();
+                }
+       }
+  }
+
+
+
+4. Write a program for matrix addition. The addition function should return the addition of the matrix.
+
+import java.io.*;
+class Matrix
+{
+        void display(int[][] a,int[][] b,int r,int c,int r1,int c1)
+        {
+                int i,j;
+
+ 	        for(i=0;i<r;i++)
+  	        {
+                        for(j=0;j<c;j++)
+	                        System.out.print(a[i][j]+" ");
+	                System.out.println();
+	        }
+                for(i=0;i<r1;i++)
+	        {
+                        for(j=0;j<c1;j++)
+                                System.out.print(b[i][j]+" ");
+	                System.out.println(); 
+                }
+        }
+        int[][] addm(int[][] a,int[][] b,int r,int c)
+        {
+                int i,j;
+                int[][] res=new int[r][c];
+	        for(i=0;i<r;i++)
+	        { 
+                        for(j=0;j<c;j++)
+                                res[i][j]=a[i][j]+b[i][j];
+	        }
+	        return res;
+	}
+}
+
+class addMatrix
+{
+        public static void main(String args[])throws IOException
+	{
+                BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+
+                int i,j;
+                Matrix m=new Matrix();
+
+                System.out.println("Enter row for 1st matrix : ");
+                int r =Integer.parseInt(br.readLine());
+ 
+                System.out.println("Enter column for 1st matrix : ");
+                int c = Integer.parseInt(br.readLine());
+
+                System.out.println("Enter row for 2nd matrix : ");
+                int r1 =Integer.parseInt(br.readLine());
+
+                System.out.println("Enter column for 2nd matrix : ");
+                int c1 = Integer.parseInt(br.readLine());
+
+                int[][] m1=new int[r][c];
+                int[][] m2=new int[r1][c1];
+
+                if(r==r1 && c==c1)
+                { 
+                        System.out.println("Enter details of first matrix :");
+                        for(i=0;i<r;i++)
+                        {
+                                 for(j=0;j<c;j++)
+                                         m1[i][j]=Integer.parseInt(br.readLine());
+                        }
+                        System.out.println("Enter details of second matrix :");
+                        for(i=0;i<r1;i++)
+                        {
+                                 for(j=0;j<c1;j++)
+                                         m2[i][j]=Integer.parseInt(br.readLine());
+                        }
+
+                        m.display(m1,m2,r,c,r1,c1);
+	                int[][] res=new int[r][c];
+                        res=m.addm(m1,m2,r,c);
+                        System.out.println("Resultant Matrix :");
+                        for(i=0;i<r;i++)
+                        {
+                                for(j=0;j<c;j++)
+                                        System.out.println(res[i][j]+" ");
+                                System.out.println();
+                        }
+               }
+               else
+                        System.out.println("Dimensions not matched");
+       }
+}
+
+ASS2
+1. Create a package named NumOperation having three different classes:
+a. Prime number
+b. Perfect Number
+c. Armstrong number
+Write a program to accept number 'n' from the user and check whether it is prime number or perfect number or Armstrong number using the above NumOperation package.
+
+import NumOperation.*;
+
+import java.io.*;
+
+class NumOperation
+{
+	public static void main(String[] args)throws IOException
+	{
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+
+		System.out.println("Enter the Number: ");
+		int n=Integer.parseInt(br.readLine());
+
+		Prime pr=new Prime();
+		Perfect pt=new Perfect();
+		Armstrong ar=new Armstrong();
+
+		pr.Primeno(n);
+		pt.Perfectno(n);
+		ar.Armstrongno(n);
+	}	
+}
+
+
+
+2.Write a program to create a Package "MScCAI" which has a class MSCCA|Marks (members - SemITotal, SemlITotal). Create another package "MScCAII' which has a class MScCAIlMarks (members - SemITotal, SemlITotal ). Create n objects of Student class (having rollNumber, name, MScCAIMarks and MScCAIlMarks). Add the marks of MScCAI and MScCAII. Calculate the Grade ('A' for >= 70, 'B' for >= 60 'C' for >= 50, Pass Class for
+> =40 else 'FAIL') and display the result of the student in proper format.
+
+import java.io.*;
+import MScCAI.*;
+import MScCAII.*;
+
+class Student
+{
+	String name;
+	static int roll;
+	int total=0,caI,caII;
+	String grade;
+
+	public Student(String name,int caI,int caII)//parameterized constructor
+	{
+		this.name=name;
+		this.roll=roll;
+		//roll++;
+		this.caI=caI;
+		this.caII=caII;
+	}
+
+	public void Grade()
+	{
+		int total=caI+caII;
+		float per=(total*100)/400;
+		if(per>70)
+			grade="A";
+		else if(per>=60)
+			grade="B";
+		else if(per>=50)
+			grade="C";
+		else if(per>=40)
+			grade="Pass";
+		else
+			grade="Fail";
+	}
+
+	public String toString()//toString method
+	{
+		return "Roll no :"+roll+"\tName :"+name+"\tMSc CAI :"+caI+"\tMSc CAII : "+caII+"\tGrade : "+grade; 
+	}
+}
+
+class StudentMain
+{
+	public static void main(String args[])throws IOException
+	{
+		int m1,m2,m3,m4,caI,caII;
+
+		String name;
+		int roll;
+
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Enter how many Students :");
+		int n;
+		while(true)
+		{
+			n=Integer.parseInt(br.readLine());
+			if(n>0)
+				break;
+			else
+				System.out.println("Invalid Input");
+				System.out.println("Re-enter how many students you want: ");
+		}
+
+		Student s[]=new Student[n];
+		MScCAIMarks ob1[]=new MScCAIMarks[n];
+		MScCAIIMarks ob2[]=new MScCAIIMarks[n];
+
+		for(int i=0;i<n;i++)
+		{
+			System.out.println("Enter Roll no of student :");
+			while(true)
+			{
+				roll=Integer.parseInt(br.readLine());
+				if(roll>0)
+					break;
+				else
+					System.out.println("Invalid Input");
+					System.out.println("Re-enter Roll No :");
+			}
+			do{
+				System.out.println("Enter Name : ");
+				name=br.readLine();
+			}while(name.length()==0);
+
+			System.out.println("Enter MSc CA I Sem 1 Marks : ");
+			while(true)
+			{
+				m1=Integer.parseInt(br.readLine());
+				if(m1>=0 && m1<=100)
+					break;
+				else
+					System.out.println("Invalid Input!!");
+			}
+
+			System.out.println("Enter MSc CA I Sem 2 Marks : ");
+			while(true)
+			{
+				m2=Integer.parseInt(br.readLine());
+				if(m2>=0 && m2<=100)
+					break;
+				else
+					System.out.println("Invalid Input!!");
+			}
+
+			System.out.println("Enter MSc CA II Sem 1 Marks : ");
+			while(true)
+			{
+				m3=Integer.parseInt(br.readLine());
+				if(m3>=0 && m3<=100)
+					break;
+				else
+					System.out.println("Invalid Input!!");
+			}
+
+			System.out.println("Enter MSc CA II Sem 2 Marks : ");
+			while(true)
+			{
+				m4=Integer.parseInt(br.readLine());
+				if(m4>=0 && m4<=100)
+					break;
+				else
+					System.out.println("Invalid Input!!");
+			}
+
+			ob1[i]=new MScCAIMarks(m1,m2);
+			caI=ob1[i].total();
+	
+			ob2[i]=new MScCAIIMarks(m3,m4);
+			caII=ob2[i].total();
+
+			s[i]=new Student(name,caI,caII);
+			s[i].Grade();
+		}
+		
+		for(int i=0;i<n;i++)//displaying the output
+		{
+			System.out.println(s[i]);
+		}
+	}//end of main
+}//end of class
+
+
+ASS3
+1. Define a class Employee having private members - id, name, department, salary. Define default and parameterized constructors. Create a subclass called "Manager" with private member bonus. Define method display in both the classes. Create n objects of the Manager class and display the details of the manager having the maximum total salary (salary+bonus).
+
+import java.io.*;
+class Employee
+{
+
+	private int id;
+	private String name,department;
+	private float salary;
+
+	Employee() 
+	{
+	}
+
+	Employee(int id,String name,String department,float salary)         
+	{
+		this.id=id;
+		this.name=name;
+		this.department=department;
+		this.salary=salary;
+	}
+	public void display()                         
+	{
+		System.out.print(id+"\t"+name+"\t"+department+"\t"+salary+"\t");
+        }
+	float getSalary()
+	{
+		return this.salary;
+	}
+}
+
+class Manager extends Employee    //inheritance
+{                     
+	private int bonus;
+	Manager(int id,String name,String department,float salary,int bonus)                  
+	{
+		super(id,name,department,salary);
+		this.bonus=bonus;
+	}
+	public void display()       //overriding method is use                        
+	{
+		super.display();
+		System.out.println(bonus+"\t"+(super.getSalary()+bonus));
+	}
+	float getTotal()
+	{
+		return super.getSalary()+bonus;
+	}
+	
+}
+
+class Assignment3_q1
+{
+	public static void main(String args[]) throws IOException
+	{
+		int i,j,n,id;
+		int bonus=0;
+		String name,department;
+		float salary;
+		BufferedReader br = new BufferedReader (new InputStreamReader (System.in));               
+		do
+		{
+		System.out.println("How Many Employee");
+		n = Integer.parseInt(br.readLine());
+		}while(n<=0);
+		Manager[] m=new Manager[n];
+		for(i=0;i<n;i++)
+		{
+			id=i+1;
+			System.out.println("Employee id is:"+id);
+			do
+			{
+				System.out.println("Enter the name of the employee:");
+				name = br.readLine();
+				if(name.length()==0)
+				{
+					System.out.println("Invalid Input!");
+				}
+			}while(name.length()==0);
+			
+			do
+			{
+				System.out.println("Enter department of the employee:");
+				department = br.readLine();
+				if(department.length()==0)
+				{
+					System.out.println("Invalid Input!");
+				}
+			}while(department.length()==0);
+			
+			do
+			{
+				System.out.println("Enter employee salary");
+				salary = Float.parseFloat(br.readLine());
+				if(salary<=0)
+				{
+					System.out.println("Invalid Input!");
+				}
+			}while(salary<=0);
+			do
+			{
+                                
+                                if(bonus>salary)
+                                {
+                                  System.out.println("Bonus cannot be greater then salary!!");
+                                  
+                                }
+				System.out.println("Enter employee bonus for Salary:"+salary);
+				bonus = Integer.parseInt(br.readLine());
+				if(bonus<0)
+				{
+					System.out.println("Invalid Input!");
+				}
+			}while(bonus<0 || bonus>salary);
+                       
+			System.out.println("---------------------------------------");
+			m[i]=new Manager(id,name,department,salary,bonus);
+			 bonus=0;
+		}
+		
+		System.out.println();
+		double max=0;
+		for(i=0;i<m.length;i++)
+		{	
+			if(max<m[i].getTotal())
+			{
+				max=m[i].getTotal();
+				
+			}
+			
+		}
+		
+		
+		System.out.println("-----------------**Highest Salary Details:**-----------------\t");
+                System.out.println("ID\tName\tDept\tSalary\tBonus\tSalary");
+		for(i=0;i<n;i++)
+		{
+			if(max==m[i].getTotal())
+			{
+                          
+		          m[i].display();			
+			}
+		}
+	}
+}
+
+
+
+2.Create an abstract class Shape with methods calc area and calc_volume. Derive three classes
+Sphere(radius), Cone(radius, height) and Cylinder(radius, height), Box(length, breadth, height)
+from it. Calculate area and volume of all. (Use Method overriding and Reference variable concept.
+
+import java.io.*;
+abstract class Shape         
+{
+	abstract void calc_area();              
+	abstract void calc_volume();
+}
+class Sphere extends Shape   //inheritance            
+{
+	double radius;
+	Sphere(double radius)
+	{
+		this.radius=radius;
+	}
+	void calc_area()
+	{
+		System.out.println("\nArea of Sphere is: "+4*Math.PI*radius*radius);
+	}
+	void calc_volume()
+	{
+		System.out.println("Volume of Sphere is: "+((4/3)*Math.PI*radius*radius*radius));
+	}
+}
+class Cone extends Shape                      
+{
+	double radius,height;
+	Cone(double radius,double height)
+	{
+		this.radius=radius;
+		this.height=height;
+	}
+	void calc_area()
+	{
+		System.out.println("\nArea of Cone is: "+Math.PI*radius*(radius+(Math.sqrt((height*height)+(radius*radius)))));
+	}
+	void calc_volume()
+	{
+		System.out.println("Volume of Cone is: "+Math.PI*radius*radius*(height/3));
+	}
+}
+class Cylinder extends Shape                     
+{
+	double radius,height;
+	Cylinder(double radius,double height)
+	{
+		this.radius=radius;
+		this.height=height;
+	}
+	void calc_area()
+	{
+		System.out.println("\nArea of Cylinder is: "+((2*Math.PI*radius*height)+(2*Math.PI*radius*radius)));
+	}
+	void calc_volume()
+	{
+		System.out.println("Volume of Cylinder is: "+Math.PI*radius*radius*height);
+	}
+}
+class Box extends Shape                     
+{
+	double length,breadth,height;
+	Box(double length,double breadth,double height)
+	{
+		this.length=length;
+		this.breadth=breadth;
+		this.height=height;
+	}
+	void calc_area()
+	{
+		System.out.println("\nArea of Box is: "+2*((length*breadth)+(length*height)+(breadth*height)));
+	}
+	void calc_volume()
+	{
+		System.out.println("Volume of Box is: "+(length*breadth*height));
+	}
+}
+class Assignment3_q2
+{
+	public static void main(String args[])throws IOException
+	{
+
+		Shape s;
+		double radius,height,breadth,length;
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));   
+
+		do{
+			System.out.print("\nEnter The Radius Of Sphere:");
+			radius=Double.parseDouble(br.readLine());
+		}while(radius<=0);
+		do{
+			System.out.print("\nEnter The Radius Of Cone: ");
+			height=Double.parseDouble(br.readLine());
+		}while(height<=0);
+		do{
+			System.out.print("\nEnter Height Of The Cone: ");
+			breadth=Double.parseDouble(br.readLine());
+		}while(breadth<=0);
+		do{
+			System.out.print("\nEnter Radius Of The Cylinder: ");
+			length=Double.parseDouble(br.readLine());
+		}while(length<=0);
+		do{
+			System.out.print("\nEnter Height Of The Cylinder: ");
+			length=Double.parseDouble(br.readLine());
+		}while(length<=0);
+
+		do{
+			System.out.print("\nEnter Length Of The Box: ");
+			length=Double.parseDouble(br.readLine());
+		}while(length<=0);
+		do{
+			System.out.print("\nEnter Breadth Of The Box: ");
+			length=Double.parseDouble(br.readLine());
+		}while(length<=0);
+		do{
+			System.out.print("\nEnter Height Of The Box: ");
+			length=Double.parseDouble(br.readLine());
+		}while(length<=0);
+
+		s=new Sphere(radius);
+		s.calc_area();
+		s.calc_volume();
+		
+		s=new Cone(radius,height);
+		s.calc_area();
+		s.calc_volume();
+		
+		s=new Cylinder(radius,height);
+		s.calc_area();
+		s.calc_volume();
+		
+		s=new Box(length,breadth,height);
+		s.calc_area();
+		s.calc_volume();
+	} 
+}
+
+
+
+3. Define an abstract class "Staff' with members name and address. Define two sub-classes of this class - "FullTimeStaff' (department, salary) and "PartTimeStaff' (number-of-hours, rate-perhour). Define appropriate constructors. Create n objects which could be of either FullTimeStaff or ParTimeStaff class by asking the user's choice. Display details of all
+"FullTimeStaff objects and all "PartTimeStaff' objects. (Use Method overriding and
+Reference variable concept).
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
+abstract class Staff {
+     String name;
+     String address;
+
+    public Staff(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    public abstract void displayDetails();
+}
+
+class FullTimeStaff extends Staff {
+     String department;
+     double salary;
+
+    public FullTimeStaff(String name, String address, String department, double salary) {
+        super(name, address);
+        this.department = department;
+        this.salary = salary;
+    }
+
+
+    public void displayDetails() {
+        System.out.println("-----------------*Full-Time Staff*------------------");
+        System.out.println("Name: " + name);
+        System.out.println("Address: " + address);
+        System.out.println("Department: " + department);
+        System.out.println("Salary: " + salary);
+	System.out.println("----------------------------------------------------");
+    }
+}
+
+class PartTimeStaff extends Staff {
+     int numberOfHours;
+     double ratePerHour;
+
+    public PartTimeStaff(String name, String address, int numberOfHours, double ratePerHour) {
+        super(name, address);
+        this.numberOfHours = numberOfHours;
+        this.ratePerHour = ratePerHour;
+    }
+
+
+    public void displayDetails() {
+        System.out.println("-----------------*Part-Time Staff*------------------");
+        System.out.println("Name: " + name);
+        System.out.println("Address: " + address);
+        System.out.println("Number of Hours: " + numberOfHours);
+        System.out.println("Rate per Hour: " + ratePerHour);
+	System.out.println("----------------------------------------------------");
+    }
+}
+
+
+
+public class Assignment3_q3{
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+
+
+
+
+
+
+            int choice = 0;
+            int n = 0;
+            Staff[] staff = null;
+        
+            do {
+                System.out.println("1. Full-Time Staff\n2. Part-Time Staff\n3. Exit");
+                System.out.print("Enter your choice: ");
+                choice = Integer.parseInt(br.readLine());
+        
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter the number of Full-Time Staff members: ");
+                        n = Integer.parseInt(br.readLine());
+        
+                        while (n <= 0) {
+                            System.out.print("Invalid details! Enter the number of Full-Time Staff members: ");
+                            n = Integer.parseInt(br.readLine());
+                        }
+        
+                        staff = new Staff[n];
+        
+                        for (int i = 0; i < n; i++) {
+                            System.out.println("Enter details for Full-Time Staff member " + (i + 1) + ":");
+        
+                            System.out.print("Name: ");
+                            String name = br.readLine();
+                            while (name.length() == 0) {
+                                System.out.print("Name can not be empty! Try again: ");
+                                name = br.readLine();
+                            }
+        
+                            System.out.print("Address: ");
+                            String address = br.readLine();
+                            while (address.length() == 0) {
+                                System.out.print("Address can not be empty! Try again: ");
+                                address = br.readLine();
+                            }
+        
+                            System.out.print("Department: ");
+                            String department = br.readLine();
+			    while (department.length() == 0) {
+                                System.out.print("Department can not be empty! Try again: ");
+                                department = br.readLine();
+                            }
+        
+                            System.out.print("Salary: ");
+                            double salary = Double.parseDouble(br.readLine());
+        
+                            while (salary <= 0) {
+                                System.out.print("Invalid salary! Enter Salary: ");
+                                salary = Double.parseDouble(br.readLine());
+                            }
+        
+                            staff[i] = new FullTimeStaff(name, address, department, salary);
+                        }
+                         
+                        System.out.println("\nFull-Time Staff Details:");
+                        for (int i = 0; i < n; i++) {
+                            staff[i].displayDetails();
+                            System.out.println();
+                        }
+                        break;
+        
+                    case 2:
+                        System.out.print("Enter the number of Part-Time Staff members: ");
+                        n = Integer.parseInt(br.readLine());
+        
+                        while (n <= 0) {
+                            System.out.print("Invalid details! Enter the number of Part-Time Staff members: ");
+                            n = Integer.parseInt(br.readLine());
+                        }
+        
+                        staff = new Staff[n];
+        
+                        for (int i = 0; i < n; i++) {
+                            System.out.println("Enter details for Part-Time Staff member " + (i + 1) + ":");
+        
+                            System.out.print("Name: ");
+                            String name = br.readLine();
+                            while (name.length() == 0) {
+                                System.out.print("Name can not be empty! Try again: ");
+                                name = br.readLine();
+                            }
+        
+                            System.out.print("Address: ");
+                            String address = br.readLine();
+                            while (address.length() == 0) {
+                                System.out.print("Address can not be empty! Try again: ");
+                                address = br.readLine();
+                            }
+        
+                            System.out.print("Number of Hours: ");
+                            int numberOfHours = Integer.parseInt(br.readLine());
+                            while (numberOfHours <= 0) 
+                            {
+                                System.out.print("Invalid details! Enter Number of Hours: ");
+                                numberOfHours = Integer.parseInt(br.readLine());
+                            }
+        
+                            System.out.print("Rate per Hour: ");
+                            double ratePerHour = Double.parseDouble(br.readLine());
+                            while(ratePerHour<=0)
+                           {
+                                System.out.print("invalid details! enter Rate per Hour");
+                                ratePerHour = Double.parseDouble(br.readLine());
+                           }
+
+                           staff[i] = new PartTimeStaff(name, address, numberOfHours, ratePerHour);
+
+                          }
+
+                          
+                        System.out.println("\nPart-Time Staff Details:");
+                        for (int i = 0; i < n; i++) {
+                            staff[i].displayDetails();
+                            System.out.println();
+                        }
+                        break;
+
+                        case 3:
+                             break;
+
+                }
+
+            }while(choice!=3);
+
+    }
+}
+
+
+
+ASS4
+1.Create an interface "CreditCardInterface" with methods : viewCreditAmount), useCard0, payCredit0 and increaseLimit0). Create a class SilverCardCustomer (name, cardnumber (16 digits), creditAmount - initialized to 0, creditLimit - set to 50,000 ) which implements the above interface. Inherit class GoldCardCustomer from SilverCardCustomer having the same methods but creditLimit of 1,00,000. Create an object of each class and perform operations.
+Display appropriate messages for success or failure of transactions. (Use method overriding)
+i. useCard0 method increases the creditAmount by a specific amount upto creditLimit i.
+ii.payCredit0 reduces the creditAmount by a specific amount.
+iii.increaseLimit increases the creditLimit for GoldCardCustomers (only 3 times, not more than 5000Rs. each time
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+interface CreditCardInterface
+{
+	 void viewCreditAmount() throws Exception;
+	 void useCard() throws Exception; 	
+	 void payCredit() throws Exception;
+	 void increaseLimit() throws Exception;
+}
+
+
+class SilverCardCustomer implements CreditCardInterface
+{
+	String name;
+    	String cardnumber;
+    	double creditAmount,creditLimit;
+    
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        SilverCardCustomer()
+        {
+                creditAmount=0;
+                creditLimit=50000;
+        }
+
+        public void accept() throws IOException
+        {
+		do
+		{
+			System.out.println("Enter Name : ");
+                	name = br.readLine();
+		}while (name.length()==0);
+	
+               
+                while(true)
+                {
+                	System.out.println("Enter Card Number : ");
+                	int flag=0;
+                       	cardnumber = br.readLine();
+                       	for(int i=0;i<cardnumber.length();i++)
+                       	{
+                       		if(!Character.isDigit(cardnumber.charAt(i)))
+                       			flag=1;
+                       	}
+                       	
+                        if(cardnumber.length()==16 && flag==0)
+                                break;
+                        else if(cardnumber.length()==16 && flag==1)
+                                System.out.println("Credit Card Number Has Digits Only !!!");
+                        else if(cardnumber.length()!=16 && flag==1)
+                        	System.out.println("Enter 16 Digit Card Number Which Contains Only Digits");
+                        else
+                        	System.out.println("Enter 16 Digit Card Number");
+
+                }
+
+		
+         }
+   public  void increaseLimit()
+	 {
+		 System.out.println("Since It Is A Silver Card, Cant Increase The Limit");
+	 } 
+   public  void viewCreditAmount()
+         {
+                System.out.println("\nYour Credit Amount : "+creditAmount);
+       	 }
+
+
+   public void payCredit() throws NumberFormatException, IOException
+        {
+                if(creditAmount==0)
+                {
+                        System.out.println("\nCan't Pay Credit,Your Balance Is 0\n");
+                }
+                else
+        {
+                double amount;
+                System.out.println("Enter Amount : ");
+                while(true)
+                {
+                        amount = Double.parseDouble(br.readLine());
+                        if(amount>0)
+                        {
+                        if(amount > creditAmount)
+                        {
+                                System.out.println("\n Amount Is More Than Credit Amount!!");
+                                System.out.println("\n Enter Valid Credit Amount : ");
+
+                        }
+                        else
+                        {
+                                creditAmount = creditAmount - amount;
+                                System.out.println("Paid Successfully !!!");
+                                viewCreditAmount();
+                                break;
+                        }
+                        }
+                        else
+                        { 
+                          System.out.println("Amount Cannot Be Zero");
+                          System.out.println("Enter Amount : ");
+                        }
+                }
+           }
+        }
+
+  public void useCard()throws Exception 
+        {
+		Double payAmt;
+                if(creditAmount!=creditLimit)
+                {
+
+                System.out.println("Enter The Amount For Increasing Credit Amount : ");
+                while(true)
+                {
+                        payAmt = Double.parseDouble(br.readLine());
+                        if(payAmt>0)
+                        {
+                           if((payAmt+creditAmount)<=creditLimit)
+                        {
+                                creditAmount = creditAmount + payAmt;
+                                System.out.println("Used Successful");
+                                viewCreditAmount();
+                                break;
+                        }
+                        else
+                        {
+                                System.out.println("Exceeding Credit Limit !!!");
+                                System.out.println("\n Enter Valid Paying Amount : ");
+                        }
+                          
+                        }
+			else
+			{
+                          System.out.println("Amount Need To Be Positive");
+                          System.out.println("Enter Amount : ");
+			}
+                       
+                }
+                }
+                else{
+                        System.out.println("\nCredit Limit Has Reached !!");
+                    }
+        }
+}
+
+class GoldCardCustomer  extends SilverCardCustomer
+{
+        public int cnt;
+        double amount;
+
+        GoldCardCustomer()
+        {
+                creditLimit=100000;
+        }
+
+        public void increaseLimit() 
+        {
+                cnt++;
+                if(cnt<4)
+                {
+
+                                creditLimit = creditLimit + 5000;
+                                System.out.println("Credit Limit Is Increased !!!");
+                                System.out.println("Updated Credit limit : "+creditLimit);
+                                System.out.println("\n");
+
+
+                }
+                else
+                        System.out.println("Can't Increase Limit More Than 3 Times !!!\n");
+
+        }
+
+}
+
+
+class Ass4_q1
+{
+	public static void main(String args[]) throws Exception
+	{
+		int ch,cch;
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));	
+	
+	do
+	   {		
+		System.out.println("1 : Silver Card ");		
+		
+		System.out.println("2 : Gold Card ");
+		
+		System.out.println("0 : Exit ");
+				
+
+		System.out.println("Enter Card Choice : ");
+		cch = Integer.parseInt(br.readLine());
+	switch(cch)
+	{
+		case 1:	
+			SilverCardCustomer s = new SilverCardCustomer();
+			s.accept();
+
+			do
+			{
+				System.out.println("1 : Use Silver Card");
+				System.out.println("2 : Pay Credit For Silver Card");
+				System.out.println("3 : Increase Limit For Silver Card");
+                                System.out.println("4 : View Balance");
+				System.out.println("0 : Exit ");	
+
+				System.out.println("Enter Your Choice :");
+				ch = Integer.parseInt(br.readLine());
+				switch(ch)
+				{
+					case 1:
+						s.useCard();
+						break;
+
+					case 2:
+						s.payCredit();
+						break;
+				
+					case 3:
+					       s.increaseLimit();	
+						break;
+            
+                                       case 4:
+                                            s.viewCreditAmount();
+                                              break;
+
+					case 0:System.out.println("Silver Card Menu Over");break;
+					default:
+						System.out.println("\nInvalid Option !!!\n");
+				}
+			}while(ch!=0);
+			break;		
+		case 2:
+			GoldCardCustomer g = new GoldCardCustomer();
+			g.accept();
+			do
+			{
+				System.out.println("1 : Use Gold Card");
+				System.out.println("2 : Pay Credit For Gold Card");
+				System.out.println("3 : Increase Limit For Gold");
+                                System.out.println("4 : View Balance");
+				System.out.println("0 : Exit ");	
+
+				System.out.println("Enter Your Choice : ");
+				ch = Integer.parseInt(br.readLine());
+				switch(ch)
+				{
+					case 1:
+						g.useCard();
+						break;
+
+					case 2:
+						g.payCredit();
+						break;
+
+					case 3:
+						g.increaseLimit();
+						break;
+				       case 4:
+                                            g.viewCreditAmount();
+                                              break;
+					case 0: System.out.println("Golden Card Menu Over");
+						break;
+					default:
+						System.out.println("\nInvalid Option !!!\n");
+				}
+			}while(ch!=0);
+			break;			
+		case 0:
+			break;
+		default:
+				System.out.println("\nInvalid Option !!!\n");
+
+	}
+	}while(cch!=0);
+	}
+}
+
+
+
+2.Write a program to create a super class Vehicle having members Company and price. Derive 2 different classes LightMotorVehicle (members - mileage) and HeavyMotor Vehicle (members
+- capacity-in-tons). Accept the information for n vehicles and display the information in appropriate form. While taking data, ask the user about the type of vehicle first.
+
+import java.io.*;
+
+class Vehicle
+{
+	String Company;
+	float price;
+        Vehicle(String Company,float price)
+	{
+         this.Company=Company;
+         this.price=price;
+	}
+public void display()
+	{
+		System.out.print(Company);
+		System.out.print("\t"+price);
+	}
+
+}
+class LightMotorVehicle extends Vehicle
+{
+	float mileage;
+	
+	LightMotorVehicle(String Company,float price,float mileage)
+        {
+         super(Company,price);
+         this.mileage=mileage;
+	}
+
+public void display()
+	{
+		super.display();
+		System.out.println("\t"+mileage);
+
+	}
+
+}
+	
+class HeavyMotorVehicle extends Vehicle
+{
+	float capacity_in_tons;
+	
+HeavyMotorVehicle(String Company,float price,float capacity_in_tons)
+        {
+         super(Company,price);
+         this.capacity_in_tons=capacity_in_tons;
+	}
+
+public void display()
+	{
+		super.display();
+		System.out.println("\t"+capacity_in_tons);
+
+	}
+
+}
+
+class Vehicle1
+{
+	public static void main(String args[]) throws IOException
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n,ch;
+		String Company;
+                float mileage,capacity_in_tons,price;
+		Vehicle v[]=null;
+               do{
+            	 System.out.println("Choose your option:");
+                System.out.println("\n1: LightMotorVehicle");
+		System.out.println("2: HeavyMotorVehicle");
+		System.out.println("3: Exit\n");
+		System.out.println("Enter your choice : ");
+                ch = Integer.parseInt(br.readLine());
+                switch(ch)
+                {
+                case 1:
+                	while(true)
+                	{
+                System.out.println("Enter how many Vehicles : ");
+		n = Integer.parseInt(br.readLine());
+		 if(n>0)
+			 break;
+                	}
+		v= new LightMotorVehicle[n];
+		for(int i=0;i<n;i++)
+		{
+			while(true)
+			{
+		System.out.println("Enter Company Name : ");
+		Company = br.readLine();
+		if(Company.length()==0)
+		{
+		System.out.println("Company Name Cannot be Empty");	
+		}
+		else
+		{
+			break;
+		}
+		}
+			
+		System.out.println("Enter price : ");
+
+		while(true)
+		{
+			price = Float.parseFloat(br.readLine());		
+			if(price > 0)
+				break;
+			else
+				System.out.println("Price must be positive !!");	
+				System.out.println(" Enter price : ");		
+		}
+               System.out.println(" Enter Milage : ");
+		while(true)
+		{
+			mileage = Float.parseFloat(br.readLine());		
+			if(mileage > 0)
+				break;
+			else
+				System.out.println("Mileage must be positive!!");	
+				System.out.println(" Enter Milage : ");		
+		}
+                v[i]=new LightMotorVehicle(Company,price,mileage);	
+		} 
+		System.out.println("All vehicle are as follows : "); 
+                System.out.println("\n"+"Company\tPrice\tMileage");
+		for(int i=0;i<n;i++)
+			v[i].display();
+                break;
+		
+              case 2:
+            	  while(true)
+              	{
+              System.out.println("Enter how many Vehicles : ");
+		n = Integer.parseInt(br.readLine());
+		 if(n>0)
+			 break;
+              	}
+	       v= new HeavyMotorVehicle[n];
+               for(int i=0;i<n;i++)
+		{
+            	   while(true)
+       			{
+       		System.out.println("Enter Company Name : ");
+       		Company = br.readLine();
+       		if(Company.length()==0)
+       		{
+       		System.out.println("Company Name Cannot be Empty");	
+       		}
+       		else
+       		{
+       			break;
+       		}
+       		}
+		System.out.println("Enter price : ");
+
+		while(true)
+		{
+			price = Float.parseFloat(br.readLine());		
+			if(price > 0)
+				break;
+			else
+				System.out.println("Price must be positive!!");	
+				System.out.println("Enter price : ");		
+		}
+			System.out.println("Enter capacity_in_tons : ");
+
+		while(true)
+		{
+			capacity_in_tons = Float.parseFloat(br.readLine());		
+			if(capacity_in_tons > 0)
+				break;
+			else
+				System.out.println("Capacity_in_tons must be positive!!");	
+				System.out.println("Enter capacity_in_tons : ");		
+		}
+                v[i]=new HeavyMotorVehicle(Company,price,capacity_in_tons);		
+		} 
+		System.out.println("All Heavy weight vehicles are as follows : ");
+                System.out.println("\n"+"Company\tPrice\tCapacity in Tons");
+		for(int i=0;i<n;i++)
+			v[i].display();
+                break;
+      
+                case 3:
+                 System.out.println("Exiting application...");
+                 break;
+         
+                default:
+                  System.out.println("Invalid Choice");
+                 break;
+		}
+               }while(ch!=3);	
+         
+	}
+}
+
+
+
+ASS5
+1. Write a program to accept a string as command line argument and check whether it is a file or directory. If it is a directory, list the contents of the directory, count how many files the directory has and display name of all files in that directory having extension .txt. If it is a file, display all information about the file (path, size, attributes etc).
+
+import java.io.File;
+
+public class Assignment5_q1
+{
+    public static void main(String[] args) 
+   {
+        String path = args[0];
+        File fileOrDirectory = new File(path);
+        
+        if (fileOrDirectory.isFile())  
+         {
+            // If it's a file, display file information
+
+            System.out.println("File path: " + fileOrDirectory.getAbsolutePath());
+            System.out.println("File size: " + fileOrDirectory.length() + " bytes");
+        }
+            else if (fileOrDirectory.isDirectory())  
+           {
+            // If it's a directory, display directory information
+            System.out.println("Directory path: " + fileOrDirectory.getAbsolutePath());
+            File[] directoryContents = fileOrDirectory.listFiles();
+            int fileCount = 0;
+            if (directoryContents != null)
+            {
+                // Loop through directory contents
+                for (File file : directoryContents) 
+                {
+                    if (file.isFile()) 
+                     {
+                        // If it's a file, count it and display its name if it has a .txt extension
+                        fileCount++;
+                        String fileName = file.getName();
+                        if (fileName.endsWith(".txt")) 
+                        {
+                            System.out.println(fileName);
+                        }
+                    }
+                }
+            }
+            // Display the number of files in the directory
+            System.out.println("Number of files in the directory: " + fileCount);
+        }  
+            else 
+           {
+            System.out.println(path + " is not a valid file or directory.");
+        }
+    }
+}
+
+2. Write a program to accept a filename as command line argument and print the number of lines, number of characters and number of words in the file.
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+public class Assignment5_q2 {
+    public static void main(String[] args) {
+        String fileName = args[0];
+        int lineCount = 0;
+        int charCount = 0;
+        int wordCount = 0;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Increment line count
+                lineCount++;
+                
+                // Increment character count
+                charCount += line.length();
+                
+                // Increment word count
+                StringTokenizer st = new StringTokenizer(line);
+                wordCount += st.countTokens();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        System.out.println("Line count: " + lineCount);
+        System.out.println("Character count: " + charCount);
+        System.out.println("Word count: " + wordCount);
+    }
+}
+3. Write a program to accept a file called "input.txt" as command line argument. Write all text at even line numbers from the file in "even.txt" and all text at odd line number from the file in
+"odd txt"
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Assignment5_q3 
+{
+    public static void main(String[] args) 
+    {
+        String inputFileName = args[0];
+        String evenFileName = "even.txt";
+        String oddFileName = "odd.txt";
+        int lineNum = 1;
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(inputFileName));
+             BufferedWriter evenWriter = new BufferedWriter(new FileWriter(evenFileName));
+             BufferedWriter oddWriter = new BufferedWriter(new FileWriter(oddFileName))) 
+        {
+            
+            String line;
+            while ((line = br.readLine()) != null) 
+           {
+                if (lineNum % 2 == 0) 
+                {
+                    // Write even lines to even.txt
+                    evenWriter.write(line);
+                    evenWriter.newLine();
+                }  
+                else 
+                {
+                    // Write odd lines to odd.txt
+                    oddWriter.write(line);
+                    oddWriter.newLine();
+                }
+                lineNum++;
+            }
+            
+          }  
+            catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        
+        System.out.println("Done.");
+    }
+}
+
+
+
+ASS6
+1. Write a program to implement a simple applet that sets the background color to blue, the foreground color to yellow and displays a message that shows the order in which the applet methods are called when an applet starts up.
+
+import java.awt.*;
+import java.applet.*;
+
+/* <Applet code = "Simple_Applet" width = 400 height = 400>
+</Applet>*/
+
+public class Simple_Applet extends Applet // this is the class defination for Simple applet,which extends applet
+{
+	String message = null;
+	String message1 = null;
+	String mesage2 = null;
+		
+	public void init()
+	{
+		// this methos sets the background and foreground of the applet
+		
+		setBackground(Color.blue);  
+		setForeground(Color.yellow);
+		message = "Init() is invoked";
+	}
+
+	public void start()
+	{
+		// this methos is called when the the applet is start 
+		setForeground(Color.yellow);
+		message1 = "Start() is invoked ";
+	}
+	
+
+	
+	public void paint(Graphics g)
+	{  
+		// this method draws the "inside the paint paint method " message on the applet
+		g.setColor(Color.yellow);
+		g.drawString(" A SIMPLE APPLET",120,130);
+		mesage2= "  Paint() is invoked ";
+		g.drawString( message,120,40);
+		g.drawString(message1,120,80);
+		g.drawString(mesage2,120,100);
+	
+	/*public void stop()
+	{
+	  System.out.println("");
+	}
+		
+	public void destroy()
+	
+	{
+	 System.out.println("");
+	}
+	*/
+	
+	}
+}
+
+
+2. Write a program to display the current date and time using simple applet. Also display greeting message like "Good Morning" or "Good Afternoon" or "Good Evening" depending on the current time in the applet's status window.
+
+import java.awt.*;
+import java.applet.*;
+import java.util.*;
+import java.text.*;
+
+/*<applet code="time" width=400 height=400>
+</applet>*/
+
+public class time extends Applet
+{
+	public void paint(Graphics g)
+	{
+		Calendar c = Calendar.getInstance();
+		Date d = new Date();
+		SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+		int hour = (12+c.get(Calendar.HOUR));
+		int minute = c.get(Calendar.MINUTE);
+		int second = c.get(Calendar.SECOND);
+		String time = ""+hour+":"+minute+":"+second+"";
+		g.drawString(time,120,120);
+		String strDate = sd.format(d);
+		g.drawString(strDate,120,140);
+
+		if(((hour>=0)&&(hour<12)))
+			showStatus("Good Morning!!");
+		else if((hour>=12)&&(hour<17))
+			showStatus("Good Afternoon!!");
+		else if((hour>=17)&&(hour<20))
+			showStatus("Good Evening!!");
+	}
+
+}
+
+
+
+3. Write a program to pass a string as a parameter to applet. Read this parameter and display it on the applet window. Further show all vowels from the read parameter in the applet's status window.
+
+import java.awt.*;
+import java.applet.*;
+import java.util.*;
+
+/*<applet code = "vowels" width=500 height=500>
+*<param name = "Message" value = "ANKITA BHARADWAJ">
+*</applet>
+*/
+
+public class vowels extends Applet
+{
+	String message = null;
+	public void init()
+	{
+		message = getParameter("Message");
+	}	
+		
+	public void paint(Graphics g)
+	{
+		String message_1 = "";
+		boolean flag=false;
+		g.drawString(message,50,25);
+		for(int i=0;i<message.length();i++)
+		{
+			if(message.charAt(i)=='a' || message.charAt(i)=='e'|| message.charAt(i)=='i' || message.charAt(i)=='o' || message.charAt(i)=='u' || message.charAt(i)=='A' || message.charAt(i)=='E' || message.charAt(i)=='I' || message.charAt(i)=='O' || message.charAt(i)=='U')
+			{
+					if(flag=false)
+					{
+						message_1=""+message.charAt(i);
+						flag=true;
+					}
+					else
+						message_1 += " "+message.charAt(i);	
+			}
+			showStatus("Vowels in the given String : "+message_1);			
+		}	
+	}
+}
+
+
+
+ASS7
+1.Write a prog to design screen mouse X,mouse Y,mouse X coordinate and mouse Y coordinate are labels
+
+import java.awt.*;
+import java.applet.*;
+
+/*<applet code = "ass7_1" height = 500 width = 500>
+</applet>*/
+	
+public class ass7_1 extends Applet
+{
+	public void init()
+	{
+		Label l1 = new Label(" Mouse X");
+		Label l2 = new Label("Mouse X coordinate");
+		Label l3 = new Label(" Mouse Y");
+		Label l4 = new Label("Mouse Y coordiante");
+
+		setLayout(new GridLayout(3,3));
+		add(l1);
+		add(l2);
+		add(l3);
+		add(l4);
+	}
+}
+
+
+
+2.write a prog to design screen house red yellow and white
+
+import java.applet.*;
+import java.awt.*;
+
+/*<applet code = "ass7_2" width = 500 height = 500>
+*</applet>
+*/
+
+public class ass7_2 extends Applet
+{
+	public void paint(Graphics g)
+	{
+		int x[] = {300,400,190};
+		int y[] = {30,220,220};
+		int numpoints = 3;
+		String msg=null;
+		Font f = new Font("",Font.BOLD,18);
+		
+		//Roof
+		Color c = new Color(255,0,0);
+		g.setColor(c);
+		g.fillPolygon(x,y,numpoints);
+
+		//Wall
+		c = new Color(255,255,0);
+		g.setColor(c);
+		g.fillRect(190,220,210,220);
+		
+		//Door
+		c = new Color(255,255,255);
+		g.setColor(c);
+		g.fillRect(255,320,80,120);
+		
+		
+	}
+
+}
+
+
+
+3.Write a prog to obtain and display the names of the available font families on multiple lines of text.
+
+import java.awt.*;
+import java.applet.*;
+
+/*<applet code = "ass7_3" width = 1680 height = 1050>
+</applet>
+*/
+
+public class ass7_3 extends Applet
+{
+	public void paint(Graphics g)
+	{
+		String FontList[];
+		int y=20;
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		FontList = ge.getAvailableFontFamilyNames();
+
+		for(int i = 0;i < FontList.length;i++)
+		{
+			g.drawString(FontList[i],10,y);
+			y+=20;
+		}
+	}
+}
+
+
+
+ASS8
+1.Write a prog to design screen of number conversion decimal,binary,octal,hexadecimal,result in binary, result in octal and result in hexadecimals are labels.blank rectangle is textbox.convert and exits are buttons.
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+class conversion extends JFrame
+{
+	JButton b1,b2;
+	JLabel l1,l2,l3,l4,l5,l6,l7;
+	JTextField t1;
+
+	conversion()	
+	{
+	JFrame frm = new JFrame("Number Conversion");
+	frm.setSize(480,200);
+	frm.setLayout(new GridLayout(5,2));
+
+	JLabel l1 = new JLabel("Decimal Number");
+	JTextField t1 = new JTextField(10);
+	t1.setEditable(false);
+	
+	JLabel l2 = new JLabel("Binary Number");
+	JLabel l3 = new JLabel("");
+	JLabel l4 = new JLabel("Result in Binary");	
+	
+	JLabel l5 = new JLabel("Ocatl Number");
+	JLabel l6 = new JLabel("");
+	JLabel l7 = new JLabel("Result in Octal");
+	
+	JLabel l8 = new JLabel("Hexadecimal Number");
+	JLabel l9 = new JLabel("");
+	JLabel l10 = new JLabel("Result in Hexadecimal");
+	
+	JButton b1 = new JButton("Convert");
+	JButton b2 = new JButton("Exit");
+	
+	frm.add(l1);
+	frm.add(t1);
+
+	frm.add(l2);
+	frm.add(l4);
+	frm.add(l5);
+	frm.add(l7);
+	frm.add(l8);
+	frm.add(l10);
+	frm.add(b1);
+	frm.add(b2);
+	frm.setVisible(true);
+	frm.setDefaultCloseOperation(frm.EXIT_ON_CLOSE);	
+	}
+	public static void main(String args[])
+	{
+		new conversion();		
+	}
+}
+
+
+
+2.Write a prog to design screen where font,font style and size are label.font family is a combo box.bo;d and italic are radio or option button.number is a list.hello everyone is a text box whose contents are not edotable.apply and exit are buttons.
+
+import java.awt.*;
+import javax.swing.*;
+
+class FontFrame extends JFrame
+{
+	JLabel font,font_style,size;
+	JButton btnApply,btnExit;
+	JTextField fontOpt;
+	JComboBox fontFam;
+	JRadioButton bold,italic;
+	ButtonGroup radioButton;
+	Box verticalBox;
+	DefaultListModel listModel;
+	String fonts[];
+	JScrollPane scroll;
+	JList list;
+
+	FontFrame()
+	{
+		font = new JLabel("Font");
+		font_style = new JLabel("Font Style");
+		size = new JLabel("Size");
+		
+		btnApply = new JButton("Apply");
+		btnExit = new JButton("Exit");
+
+		fontOpt = new JTextField("Hello Everyone");
+		fontOpt.setEditable(false);
+		fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+		fontFam = new JComboBox(fonts);
+
+		bold = new JRadioButton("Bold");
+		italic = new JRadioButton("Italic");
+
+		radioButton = new ButtonGroup();
+
+		radioButton.add(bold);
+		radioButton.add(italic);
+
+		listModel = new DefaultListModel();
+		String[] fontSizes = new String[50];
+		for(int i = 0;i<=50;i++)
+		{
+			listModel.addElement(String.valueOf(i+10));
+		}
+
+		list = new JList(listModel);
+		scroll = new JScrollPane(list);
+
+scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		Box verticalBox = Box.createVerticalBox();
+		verticalBox.add(bold);
+		bold.setActionCommand("bold");
+
+		verticalBox.add(italic);
+		italic.setActionCommand("italic");
+
+		setSize(550,450);
+		setVisible(true);
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new GridLayout(3,3));
+
+		add(font);
+		add(font_style);
+		add(size);
+
+		add(fontFam);
+		add(verticalBox);
+		add(scroll);
+
+		add(fontOpt);
+		add(btnApply);
+		add(btnExit);
+	}
+	public static void main(String args[])
+	{
+		new FontFrame();
+	}
+}
+
+
+
+ASS9
+1.Write a program to implement question number 1 of assignment VII which will displays the current coordinates of mouse in the label Mouse X coordinate and Mouse Y coordinate.
+
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+
+/*<applet code = "Ass9_q1" width=250 height=250>
+ * </applet>
+*/
+
+public  class Ass9_q1 extends Applet implements MouseMotionListener
+{
+	Label l1,l2,l3,l4;
+	public void init()
+	{
+		Label l1 = new Label("Mouse X");
+		l2 = new Label("Mouse X Coordinate");
+		l2.addMouseMotionListener(this);
+		
+		Label l3 = new Label("Mouse Y");
+		l4 = new Label("Mouse Y Coordinate");
+		l4.addMouseMotionListener(this);
+
+		addMouseMotionListener(this);
+		setLayout(new GridLayout(3,2));
+		add(l1);
+		add(l2);
+		add(l3);
+		add(l4);
+	}
+	public void mousePressed(MouseEvent me)
+	{
+
+	}
+	public void mouseClicked(MouseEvent me)
+	{
+
+	}
+	public void mouseEntered(MouseEvent me)
+	{
+
+	}
+	public void mouseExited(MouseEvent me)
+	{
+
+	}
+	public void mouseReleased(MouseEvent me)
+	{
+
+	}
+	public void mouseDragged(MouseEvent me)
+	{
+
+	}
+	public void mouseMoved(MouseEvent me)
+	{
+		l2.setText(String.valueOf(me.getX()));
+		l4.setText(String.valueOf(me.getY()));
+	}
+}
+
+
+
+2. Write a program to implement question number 1 of assignment VIII and display the appropriate number conversion results in the label after clicking Convert button. Use Exit button to terminate the application.
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+class Ass9_q2 extends JFrame implements ActionListener
+{
+	JLabel BinaryResult, OctalResult, HexResult,label;
+	JTextField t1;
+	JButton ConvertButton, ExitButton;
+	Container container;
+	JFrame f;
+	
+	String toBinary(int num)
+	{
+		int tmp;
+		tmp = num;
+		//int numberSystem = 2;
+		String binary = "";
+		while(num >= 2)
+		{
+			binary = num%2 + binary ;
+			num = num /2;
+		}
+		binary = num + binary ;
+		return binary;
+	}
+	
+	String toOctal(int num)
+	{
+		int tmp;
+		tmp = num;
+		//int numberSystem = 8;
+		String octal = "";
+		while(num >= 8)
+		{
+			octal = num%8 + octal;
+			num = num /8;
+		}
+		octal = num + octal;
+		return octal;
+	}
+	
+	String toHex(int num)
+	{
+		String[] nums = {"0", "1","2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C","D", "E", "F"};
+		int tmp;
+		tmp = num;
+		//int numberSystem = 16;
+		String hexa = "";
+		while(num >= 16)
+		{
+			hexa = nums[num%16] + hexa;
+			num = num /16;
+		}
+		hexa = nums[num] + hexa ;
+		return hexa;
+	}
+	
+	Ass9_q2()
+	{
+		f = new JFrame ("Number Conversion");
+		f.setSize (400, 200);
+		container = getContentPane();
+		f.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		f.setLayout (new GridLayout (5, 2));
+		JLabel decimal = new JLabel ("Decimal");
+		t1 = new JTextField (20);
+		t1.setEditable(true);
+		container.add(t1);
+		container.add(label = new JLabel("HI"));
+		t1.addKeyListener(new KeyAdapter()
+				{
+					public void keyPressed(KeyEvent ke)
+					{
+						String value = t1.getText();
+						int l = value.length();
+						if(ke.getKeyChar() >= '0' && ke.getKeyChar() <='9' || ke.getKeyChar() == '\b')
+						{
+							t1.setEditable(true);
+							label.setText("");
+						}
+						else
+						{
+							t1.setEditable(false);
+							label.setText("Enter only numbers (0-9)");
+						}
+					}
+				});
+		
+		JLabel Binary = new JLabel ("Binary");
+		BinaryResult = new JLabel ("Result in Binary");
+		JLabel Octal = new JLabel ("Octal");
+		OctalResult = new JLabel ("Result in Octal");
+		JLabel Hex = new JLabel ("Hexadecimal");
+		HexResult = new JLabel ("Result in Hexadecimal");
+		ConvertButton = new JButton ("Convert");
+		ConvertButton.addActionListener (this);
+		ExitButton = new JButton ("Exit");
+		ExitButton.addActionListener (this);
+		f.add (decimal);
+		f.add (t1);
+		f.add (Binary);
+		f.add (BinaryResult);
+		f.add (Octal);
+		f.add (OctalResult);
+		f.add (Hex);
+		f.add (HexResult);
+		f.add (ConvertButton);
+		f.add (ExitButton);
+		f.setVisible (true);
+	}
+	
+	public void actionPerformed (ActionEvent ae)
+	{
+		if (ae.getSource () == ConvertButton)
+		{
+			String decimal = t1.getText ();
+			int d = Integer.valueOf (decimal);
+			if(d>=0 && d<=15)
+			{
+				BinaryResult.setText (toBinary(d));
+				OctalResult.setText (toOctal(d));
+				HexResult.setText (toHex(d));
+			}
+			
+			else
+			{
+				t1.setText("");
+				BinaryResult.setText ("");
+				OctalResult.setText ("");
+				HexResult.setText ("");
+				JOptionPane.showMessageDialog(f,"Please Enter value between 0 to 15");
+			}
+		}
+		
+		if (ae.getSource () == ExitButton)
+		{
+			System.exit (0);
+		}
+	}
+	
+	public static void main (String args[])
+	{
+		new Ass9_q2();
+	}
+}
+
+
+
+3. Write a program to implement question number 2 of assignment VIII and apply the font, font style and size effect on the text "Hello Evervone" after clicking Apply button. Use Exit button to terminate the application.
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+
+class Ass9_q3 extends JFrame implements ActionListener
+{
+	JLabel font,font_style,size;
+	JButton apply,exit;
+	JTextField fontOpt;
+	JComboBox fontFam;
+	JRadioButton bold,italic;
+	ButtonGroup radioButton;
+	Box verticalBox;
+	DefaultListModel listModel;
+	String fonts[];
+	JList list;
+
+	Ass9_q3()
+	{
+		font = new JLabel("Font");
+		font_style = new JLabel("Font Style");
+		size = new JLabel("Size");
+		
+		apply = new JButton("Apply");
+		exit = new JButton("Exit");
+
+		fontOpt = new JTextField("Hello Everyone");
+                fontOpt.setEditable(false);
+		fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+		fontFam = new JComboBox(fonts);
+
+		bold = new JRadioButton("Bold");
+		italic = new JRadioButton("Italic");
+
+		radioButton = new ButtonGroup();
+
+		radioButton.add(bold);
+		radioButton.add(italic);
+
+		listModel = new DefaultListModel();
+		for(int i = 0;i<=60;i++)
+		{
+			listModel.addElement(String.valueOf(i+1));
+		}
+
+		list = new JList(listModel);
+		JScrollPane scrollPane = new JScrollPane(list);
+			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		Box verticalBox = Box.createVerticalBox();
+		verticalBox.add(bold);
+		bold.setActionCommand("bold");
+
+		verticalBox.add(italic);
+		italic.setActionCommand("italic");
+
+		setSize(550,450);
+		setVisible(true);
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLayout(new GridLayout(3,3));
+
+		add(font);
+		add(font_style);
+		add(size);
+
+		add(fontFam);
+		add(verticalBox);
+		add(scrollPane);
+
+		add(fontOpt);
+		add(apply);
+		add(exit);
+
+		apply.addActionListener(this);
+		exit.addActionListener(this);
+	}
+	public void actionPerformed(ActionEvent ae)
+	{
+		if(ae.getSource() == exit)
+		{
+			System.exit(0);
+		}
+		else
+		{
+			String font_style=radioButton.getSelection().getActionCommand();
+			String font = (String)fontFam.getSelectedItem();
+			int font_size = Integer.parseInt((String)list.getSelectedValue());
+			String font_str = fontOpt.getText();
+			Font font1;
+
+			if(font_style.equalsIgnoreCase("bold"))
+			{
+				font1 = new Font(font,Font.BOLD,font_size);
+			}
+			else
+			{
+				font1 = new Font(font,Font.ITALIC,font_size);
+
+			}
+			fontOpt.setFont(font1);
+		}
+	}
+	public static void main(String args[])
+	{
+		new Ass9_q3();
+	}
+}
+
+
+
+ASS10
+1.Write a program to demonstrates keyboard input. It displays keystrokes to the applet window and shows the status of each key in the applet's status window.
+
+import java.applet.*;
+import java.awt.*;
+import java.awt.event.*;
+
+/*<applet code="Ass10_q1" width=400 height=400>
+ </applet>
+ */
+
+public class Ass10_q1 extends Applet implements KeyListener
+{
+	String msg="";
+	String keyCode="";
+
+	public void init()
+	{
+		addKeyListener(this);
+	}
+	public void keyReleased(KeyEvent k)
+	{
+		showStatus("Key released");
+		repaint();
+	}
+	public void keyTyped(KeyEvent k)
+	{
+		char key1=k.getKeyChar();
+		msg+=key1+ " ";
+		showStatus("Key Typed");
+		repaint();
+	}
+	public void keyPressed(KeyEvent k)
+	{
+		int key=k.getKeyCode();
+		switch(key)
+		{
+			case KeyEvent.VK_F1:
+			msg+="F1";
+			break;
+			case KeyEvent.VK_F2:
+			msg+="F2";
+			break;
+			case KeyEvent.VK_F3:
+                        msg+="F3";
+                        break;
+			case KeyEvent.VK_F4:
+                        msg+="F4";
+                        break;
+			case KeyEvent.VK_F5:
+                        msg+="F5";
+                        break;
+			case KeyEvent.VK_F6:
+                        msg+="F6";
+                        break;
+			case KeyEvent.VK_F7:
+                        msg+="F7";
+                        break;
+			case KeyEvent.VK_F8:
+                        msg+="F8";
+                        break;
+			case KeyEvent.VK_F9:
+                        msg+="F9";
+                        break;
+			case KeyEvent.VK_F10:
+                        msg+="F10";
+                        break;
+                        case KeyEvent.VK_F11:
+                        msg+="F11";
+                        break;
+			case KeyEvent.VK_F12:
+                        msg+="F12";
+                        break;
+			case KeyEvent.VK_LEFT:
+                        msg+="LEFT";
+                        break;
+			case KeyEvent.VK_PAGE_UP:
+                        msg+="PAGEUP";
+                        break;
+			case KeyEvent.VK_PAGE_DOWN:
+                        msg+="PAGEDOWN";
+                        break;
+			case KeyEvent.VK_BACK_SPACE:
+                        msg+="BACKSPACE";
+                        break;
+			case KeyEvent.VK_INSERT:
+                        msg+="INSERT";
+                        break;
+			case KeyEvent.VK_DELETE:
+                        msg+="DELETE";
+			break;
+                        case KeyEvent.VK_RIGHT:
+                        msg+="RIGHT";
+                        break;
+			case KeyEvent.VK_ESCAPE:
+                        msg+="ESCAPE";
+                        break;
+			case KeyEvent.VK_HOME:
+                        msg+="HOME";
+                        break;
+		        case KeyEvent.VK_END:
+                        msg+="END";
+                        break;
+			case KeyEvent.VK_CONTROL:
+                        msg+="CONTROL";
+                        break;
+			case KeyEvent.VK_ALT:
+                        msg+="ALT";
+                        break;
+			case KeyEvent.VK_SHIFT:
+                        msg+="SHIFT";
+                        break;
+			case KeyEvent.VK_TAB:
+                        msg+="TAB";
+			break;
+			case KeyEvent.VK_KP_DOWN:
+                        msg+="DOWN";
+			break;
+			case KeyEvent.VK_KP_LEFT:
+                        msg+="LEFT";
+			break;
+			case KeyEvent.VK_KP_RIGHT:
+                        msg+="RIGHT";
+			break;
+			case KeyEvent.VK_KP_UP:
+                        msg+="UP";
+			break;
+			case KeyEvent.VK_SPACE:
+                        msg+="SPACE";
+			break;
+			case KeyEvent.VK_CAPS_LOCK:
+                        msg+="CAPSLOCK";
+			break;
+                        case KeyEvent.VK_NUM_LOCK:
+                        msg+="NUMLOCK";
+			break;
+                        case KeyEvent.VK_SCROLL_LOCK:
+                        msg+="SCROLLLOCK";
+			break;
+                        case KeyEvent.VK_PRINTSCREEN:
+                        msg+="PRINTSCREEN";
+			break;
+                        case KeyEvent.VK_PAUSE:
+                        msg+="PAUSE";
+			break;
+                        case KeyEvent.VK_ALT_GRAPH:
+                        msg+="ALT GRAPH";
+			break;
+                        case KeyEvent.VK_WINDOWS:
+                        msg+="WINDOWS";
+			break;
+                       
+
+
+		}
+		repaint();
+		showStatus("Key Pressed");
+		repaint();
+	}
+	public void paint(Graphics g)
+	{
+		g.drawString(msg,50,50);
+		g.drawString(keyCode,50,50);
+	}
+}
+
+
+
+2. Create an application in Java using swing that will move star towards up, down, left, and right from it's current position. Use appropriate layout managers or your own layout. The color of * should change from black to white and vice-versa depending on the box it is present. Display appropriate message if movement try to cross the boundary. Design the screen as shown:
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Ass10_q2 extends JFrame
+{
+	private JPanel panel;
+	private JLabel starLabel;
+	private int currentRow;
+	private int currentCol;
+	
+	public Ass10_q2()
+	{
+		setTitle("Star Mover");
+		setSize(400, 400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// Create the panel with a GridLayout
+		panel = new JPanel(new GridLayout(4, 4));
+		getContentPane().add(panel, BorderLayout.CENTER);
+
+        	// Add the squares to the panel
+		for (int row = 0; row < 4; row++)
+		{
+			for (int col = 0; col < 4; col++)
+			{
+				JPanel square = new JPanel();
+				square.setBackground((row + col) % 2 == 0 ? Color.BLACK : Color.WHITE);
+				panel.add(square,BorderLayout.WEST);
+			}
+		}
+
+        	// Create the star label and add it to the panel
+		//starLabel = new JLabel("\u2605"); // Unicode character for black star
+        	starLabel = new JLabel("*");
+		currentRow = 0;
+		currentCol = 0;
+                starLabel.setForeground(new Color(255,255,255));
+                starLabel.setFont(new Font("Arial",Font.PLAIN,120));
+                
+
+        
+		JPanel currentSquare = (JPanel) panel.getComponent(0);
+		currentSquare.add(starLabel);
+
+		// Create the button panel with arrow buttons
+		JPanel buttonPanel = new JPanel(new GridLayout(1, 1));
+		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+
+		buttonPanel.add(new JLabel());
+
+		JButton upButton = new JButton("UP");
+		upButton.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						moveStar(currentRow - 1, currentCol);
+						updateStarColor();
+					}
+				});
+
+		buttonPanel.add(upButton);
+		buttonPanel.add(new JLabel());
+
+		JButton leftButton = new JButton("LEFT");
+		leftButton.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						moveStar(currentRow, currentCol - 1);
+						updateStarColor();
+					}
+				});
+
+		buttonPanel.add(leftButton);
+		buttonPanel.add(new JLabel());
+
+		JButton rightButton = new JButton("RIGHT");
+		rightButton.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						moveStar(currentRow, currentCol + 1);
+						updateStarColor();
+					}
+				});
+		
+		buttonPanel.add(rightButton);
+		buttonPanel.add(new JLabel());
+		
+		buttonPanel.add(new JLabel());
+		JButton downButton = new JButton("DOWN");
+		downButton.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						moveStar(currentRow + 1, currentCol);
+						updateStarColor();
+					}
+				});
+		
+		buttonPanel.add(downButton);
+		buttonPanel.add(new JLabel());
+	}
+	
+	// Moves the star to the specified row and column, if it is within bounds
+	private void moveStar(int row, int col)
+	{
+		if (row < 0 || row > 3 || col < 0 || col > 3)
+		{
+			JOptionPane.showMessageDialog(this, "Cannot move outside the grid");
+			return;
+		}
+		
+		JPanel currentSquare = (JPanel) panel.getComponent(currentRow * 4 + currentCol);
+		currentSquare.remove(starLabel);
+		
+		JPanel newSquare = (JPanel) panel.getComponent(row * 4 + col);
+		newSquare.add(starLabel);
+		currentRow = row;
+		currentCol = col;
+		panel.repaint();
+	}
+	
+	private void updateStarColor()
+	{
+		if ((currentRow + currentCol) % 2 == 0)
+		{
+			starLabel.setForeground(Color.WHITE);
+		}
+		else
+		{
+			starLabel.setForeground(Color.BLACK);
+		}
+	}
+	
+	public static void main(String[] args)
+	{
+		Ass10_q2 sm = new Ass10_q2();
+		sm.setVisible(true);
+	};
+}
+
+
+
+3.Write a program to handle mouse clicked, mouse motion, mouse dragged events using adapter class. Display the status of mouse in the applet's status window.
+
+import java.applet.*;
+import java.awt.*;
+import java.awt.event.*;
+
+/* <APPLET CODE="Ass10_q3" WIDTH="400" HEIGHT="400">
+   </APPLET>
+*/
+public class Ass10_q3 extends Applet
+{
+	public void init() 
+	{
+		addMouseListener(new MyMouseAdapter());
+  		addMouseMotionListener(new MyMouseMotionAdapter());
+	}
+
+	public class MyMouseAdapter extends MouseAdapter
+	{
+		public void mouseClicked(MouseEvent me) 
+		{
+			showStatus("Mouse clicked  ");
+		}
+	}
+	
+	public class MyMouseMotionAdapter extends MouseMotionAdapter
+	{
+		public void mouseMoved(MouseEvent me) 
+		{
+			showStatus("Mouse moved "+ me.getX() + ", " + me.getY());
+		}
+		
+		public void mouseDragged(MouseEvent me) 
+		{
+			showStatus("Mouse dragged ");
+		}
+	}
+}

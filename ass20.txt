@@ -1,0 +1,1302 @@
+Q1] write a java applet program to perform following operations on fixed
+string value "welcome" given when user click on either LOWERCASE,
+UPPERCASE, ITALIC or BOLD. Show result in front of respective operations
+
+Solution :
+import java.applet.*;
+import java.awt.*;
+import java.awt.event.*;
+public class StringOperations extends Applet implements ActionListener {
+String text = "welcome";
+Label resultLabel;
+public void init() {
+// Create buttons
+Button lowerButton = new Button("LOWERCASE");
+Button upperButton = new Button("UPPERCASE");
+Button italicButton = new Button("ITALIC");
+Button boldButton = new Button("BOLD");
+// Add buttons to applet
+add(lowerButton);
+add(upperButton);
+add(italicButton);
+add(boldButton);
+// Create label for displaying results
+resultLabel = new Label();
+add(resultLabel);
+// Add action listeners to buttons
+lowerButton.addActionListener(this);
+upperButton.addActionListener(this);
+italicButton.addActionListener(this);
+boldButton.addActionListener(this);
+}
+public void actionPerformed(ActionEvent e) {
+String command = e.getActionCommand();
+// Perform operation based on button clicked
+if (command.equals("LOWERCASE")) {
+resultLabel.setText(text.toLowerCase());
+} else if (command.equals("UPPERCASE")) {
+resultLabel.setText(text.toUpperCase());
+} else if (command.equals("ITALIC")) {
+resultLabel.setText("<html><i>" + text + "</i></html>");
+} else if (command.equals("BOLD")) {
+resultLabel.setText("<html><b>" + text + "</b></html>");
+}
+}
+}
+
+
+Q2] Create a file "input.txt", which contains your details like name, roll
+number and class. Write a Java program that will accept a file "output.txt"
+as command line argument. Copy the contents of "input.txt" file into
+"output.txt file by toggling the case of each character and replace all digits
+by # character.
+
+Solution :
+import java.io.*;
+public class FileConverter {
+public static void main(String[] args) {
+if (args.length == 1) {
+String inputFilename = "input.txt";
+String outputFilename = args[0];
+try {
+// Open input file
+BufferedReader reader = new BufferedReader(new
+FileReader(inputFilename));
+// Open output file
+BufferedWriter writer = new BufferedWriter(new
+FileWriter(outputFilename));
+int c;
+while ((c = reader.read()) != -1) {
+// Toggle case of character
+if (Character.isUpperCase(c)) {
+c = Character.toLowerCase(c);
+} else if (Character.isLowerCase(c)) {
+c = Character.toUpperCase(c);
+}
+// Replace digit with #
+if (Character.isDigit(c)) {
+c = '#';
+}
+// Write modified character to output file
+writer.write(c);
+}
+// Close files
+reader.close();
+writer.close();
+System.out.println("File conversion successful.");
+} catch (IOException e) {
+System.err.println("Error: " + e.getMessage());
+}
+} else {
+System.err.println("Usage: java FileConverter <output file>");
+}
+}
+}
+
+
+Q3] Write a Java program that contains a class Exception Demo that throws the
+following exception depending upon the following condition:
+● If the integer is between 0 to 5, the exception of type 'Small Number' is
+thrown.
+● If the number is between 5 to 10, 'Proper Number' is thrown.
+● If the number is greater than 10, 'Greater Number' is thrown.
+● Write a static method to find factorial of small number.
+
+Solution :
+class SmallNumberException extends Exception {
+public SmallNumberException(String message) {
+super(message);
+}
+}
+class ProperNumberException extends Exception {
+public ProperNumberException(String message) {
+super(message);
+}
+}
+class GreaterNumberException extends Exception {
+public GreaterNumberException(String message) {
+super(message);
+}
+}
+public class ExceptionDemo {
+public static void main(String[] args) {
+int num = 4;
+try {
+if (num >= 0 && num <= 5) {
+throw new SmallNumberException("Small Number");
+} else if (num > 5 && num <= 10) {
+throw new ProperNumberException("Proper Number");
+} else if (num > 10) {
+throw new GreaterNumberException("Greater Number");
+}
+} catch (SmallNumberException e) {
+System.out.println(e.getMessage());
+} catch (ProperNumberException e) {
+System.out.println(e.getMessage());
+} catch (GreaterNumberException e) {
+System.out.println(e.getMessage());
+}
+int smallNum = 4;
+int factorial = findFactorial(smallNum);
+System.out.println("Factorial of " + smallNum + " is: " + factorial);
+}
+public static int findFactorial(int n) {
+if (n < 0) {
+return -1; // error code for invalid input
+} else if (n == 0) {
+return 1; // base case
+} else if (n <= 5) {
+return n * findFactorial(n - 1); // recursive case for small number
+} else {
+return -1; // error code for number too large to calculate factorial
+}
+}
+}
+
+
+Q4] Write an Applet program in Java to handle the mouse and keyboard events as
+follows:
+● Display X and Y positions of the mouse in status window while moving the
+mouse.
+● Display the alphabets pressed on Applet window.
+Use the concept of Adapter class and inner class.
+
+Solution :
+import java.awt.*;
+import java.awt.event.*;
+public class MouseAndKeyboardEvents extends java.applet.Applet {
+Label status;
+public void init() {
+status = new Label();
+add(status);
+addMouseListener(new MouseHandler());
+addKeyListener(new KeyboardHandler());
+}
+class MouseHandler extends MouseAdapter {
+public void mouseMoved(MouseEvent event) {
+int x = event.getX();
+int y = event.getY();
+status.setText("Mouse moved to X = " + x + ", Y = " + y);
+}
+}
+class KeyboardHandler extends KeyAdapter {
+public void keyPressed(KeyEvent event) {
+char c = event.getKeyChar();
+if (Character.isAlphabetic(c)) {
+status.setText("Key pressed: " + c);
+}
+}
+}
+}
+
+
+Q5] Create an interface numberConversion which has the methods as
+convertToBinary0, convertToOctalO and convetToHexadecimal0. Write a class
+which will provide the implementation of this interface by accepting the
+decimal number from the user and print all conversion result if entered
+decimal number is valid.
+
+Solution :
+import java.util.Scanner;
+interface numberConversion {
+public void convertToBinary(int decimal);
+public void convertToOctal(int decimal);
+public void convertToHexadecimal(int decimal);
+}
+class NumberConverter implements numberConversion {
+public void convertToBinary(int decimal) {
+System.out.println(decimal + " in binary: " +
+Integer.toBinaryString(decimal));
+}
+public void convertToOctal(int decimal) {
+System.out.println(decimal + " in octal: " +
+Integer.toOctalString(decimal));
+}
+public void convertToHexadecimal(int decimal) {
+System.out.println(decimal + " in hexadecimal: " +
+Integer.toHexString(decimal));
+}
+}
+public class Main {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+System.out.print("Enter a decimal number: ");
+int decimal = scanner.nextInt();
+if (decimal >= 0) {
+NumberConverter converter = new NumberConverter();
+converter.convertToBinary(decimal);
+converter.convertToOctal(decimal);
+converter.convertToHexadecimal(decimal);
+} else {
+System.out.println("Invalid input: the decimal number must be
+non-negative.");
+}
+}
+}
+
+
+Q6] Create an abstract class figure. Derive three classes square, triangle, and
+rectangle from it. Calculate area and volume of all figures. (Use Method overriding
+and concept of reference variable to call method of each figure).
+
+Solution :
+abstract class Figure {
+public abstract double area();
+public abstract double volume();
+}
+class Square extends Figure {
+private double side;
+public Square(double side) {
+this.side = side;
+}
+public double area() {
+return side * side;
+}
+public double volume() {
+return 0.0;
+}
+}
+class Triangle extends Figure {
+private double base;
+private double height;
+public Triangle(double base, double height) {
+this.base = base;
+this.height = height;
+}
+public double area() {
+return 0.5 * base * height;
+}
+public double volume() {
+return 0.0;
+}
+}
+class Rectangle extends Figure {
+private double length;
+private double width;
+private double height;
+public Rectangle(double length, double width, double height) {
+this.length = length;
+this.width = width;
+this.height = height;
+}
+public double area() {
+return 2 * (length * width + length * height + width * height);
+}
+public double volume() {
+return length * width * height;
+}
+}
+public class Main {
+public static void main(String[] args) {
+Figure square = new Square(5.0);
+System.out.println("Area of square: " + square.area());
+System.out.println("Volume of square: " + square.volume());
+Figure triangle = new Triangle(3.0, 4.0);
+System.out.println("Area of triangle: " + triangle.area());
+System.out.println("Volume of triangle: " + triangle.volume());
+Figure rectangle = new Rectangle(4.0, 5.0, 6.0);
+System.out.println("Area of rectangle: " + rectangle.area());
+System.out.println("Volume of rectangle: " + rectangle.volume());
+}
+}
+
+
+
+Q7] Write a Java Applet program which generates 2 random numbers, one
+between 1 to 10, and other between 11 to 20. Display these two numbers on label
+separated by + sign (e.g., 5 + 15). Let's user enter the addition of these two
+numbers in the text box. Provide a submit button which will verify whether the
+entered addition of two numbers is correct or not and display the appropriate
+message in the status window. Execute the program using appropriate Applet
+methods.
+
+Solution :
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+public class RandomAdditionApplet extends Applet implements
+ActionListener {
+private Label equationLabel;
+private TextField answerField;
+private Button submitButton;
+private Label statusLabel;
+private int firstNumber;
+private int secondNumber;
+public void init() {
+equationLabel = new Label();
+answerField = new TextField();
+submitButton = new Button("Submit");
+statusLabel = new Label();
+firstNumber = (int) (Math.random() * 10) + 1;
+secondNumber = (int) (Math.random() * 10) + 11;
+equationLabel.setText(firstNumber + " + " + secondNumber + " = ");
+submitButton.addActionListener(this);
+add(equationLabel);
+add(answerField);
+add(submitButton);
+add(statusLabel);
+}
+public void actionPerformed(ActionEvent e) {
+if (e.getSource() == submitButton) {
+int answer;
+try {
+answer = Integer.parseInt(answerField.getText().trim());
+} catch (NumberFormatException ex) {
+statusLabel.setText("Please enter a valid number.");
+return;
+}
+if (answer == firstNumber + secondNumber) {
+statusLabel.setText("Congratulations! Your answer is correct.");
+} else {
+statusLabel.setText("Sorry, your answer is incorrect.");
+}
+}
+}
+}
+
+
+
+Q8] Write a Java program to create a class arrayInput to store 'n' integer
+elements in the array. Use default constructor. Write a accept method to
+accept these 'n' integer elements from user. Derive the printArray class
+from arrayInput class containing a recursion method to print the array.
+Write a main method to implement this program.
+
+Solution :
+import java.util.Scanner;
+class ArrayInput {
+int[] arr;
+public ArrayInput(int n) {
+arr = new int[n];
+}
+public void accept() {
+Scanner sc = new Scanner(System.in);
+System.out.println("Enter " + arr.length + " elements:");
+for (int i = 0; i < arr.length; i++) {
+arr[i] = sc.nextInt();
+}
+}
+}
+class PrintArray extends ArrayInput {
+public PrintArray(int n) {
+super(n);
+}
+public void print(int i) {
+if (i == arr.length) {
+return;
+}
+System.out.print(arr[i] + " ");
+print(i + 1);
+}
+}
+public class Main {
+public static void main(String[] args) {
+int n = 5;
+PrintArray obj = new PrintArray(n);
+obj.accept();
+obj.print(0);
+}
+}
+
+
+
+Q9] Create a package named arrayOperation having a class as CharArray
+which contains an array having 10 characters stored in it at the time of
+coding. Write a method to convert all vowels from lowercase to uppercase
+and uppercase to lowercase. Further, write a Java program to demonstrate
+the package arrayOperaton.
+
+Solution :
+CharArray.java
+package arrayOperation;
+public class CharArray {
+private char[] arr = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
+public void toggleVowels() {
+for (int i = 0; i < arr.length; i++) {
+char c = arr[i];
+if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' ||
+c == 'I' || c == 'O' || c == 'U') {
+if (Character.isLowerCase(c)) {
+arr[i] = Character.toUpperCase(c);
+} else {
+arr[i] = Character.toLowerCase(c);
+}
+}
+}
+}
+public void printArray() {
+for (char c : arr) {
+System.out.print(c + " ");
+}
+System.out.println();
+}
+}
+Main.java
+import arrayOperation.CharArray;
+public class Main {
+public static void main(String[] args) {
+CharArray arr = new CharArray();
+System.out.print("Original array: ");
+arr.printArray();
+arr.toggleVowels();
+System.out.print("After toggling vowels: ");
+arr.printArray();
+}
+}
+Q10] Write a Java program to construct an array of 'n' strings. Accept these
+strings from the user to store hem in the array. Further sort this array in the
+descending order using standard string handling method.
+Solution :
+import java.util.Scanner;
+import java.util.Arrays;
+public class StringArraySorting {
+public static void main(String[] args) {
+Scanner sc = new Scanner(System.in);
+System.out.print("Enter the number of strings to be sorted: ");
+int n = sc.nextInt();
+String[] stringArray = new String[n];
+// Accepting strings from user and storing them in array
+System.out.println("Enter the " + n + " strings to be sorted: ");
+for(int i=0; i<n; i++) {
+stringArray[i] = sc.next();
+}
+// Sorting the array in descending order
+Arrays.sort(stringArray, (s1, s2) -> s2.compareTo(s1));
+// Printing the sorted array
+System.out.println("The sorted strings in descending order are: ");
+for(int i=0; i<n; i++) {
+System.out.println(stringArray[i]);
+}
+}
+}
+
+
+11. Write a Java Swing program to perform the following operations on the fixed string value
+"Welcome" given when user click on either LOWER CASE, UPPER CASE, ITALIC OR BOLD.
+Show the result in front of respective operations.
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class StringOperations extends JFrame implements ActionListener {
+    JLabel stringLabel, resultLabel;
+    JButton toggleButton, italicButton, boldButton;
+    JLabel toggleResultLabel, italicResultLabel, boldResultLabel;
+    String message = "Welcome";
+
+    public StringOperations() {
+        super("String Operations");
+        setLayout(new GridLayout(4, 2, 10, 10));
+
+        stringLabel = new JLabel("String:");
+        add(stringLabel);
+        resultLabel = new JLabel(message);
+        add(resultLabel);
+
+        toggleButton = new JButton("Toggle");
+        add(toggleButton);
+        toggleButton.addActionListener(this);
+
+        toggleResultLabel = new JLabel();
+        add(toggleResultLabel);
+
+        italicButton = new JButton("Italic");
+        add(italicButton);
+        italicButton.addActionListener(this);
+
+        italicResultLabel = new JLabel();
+        add(italicResultLabel);
+
+        boldButton = new JButton("Bold");
+        add(boldButton);
+        boldButton.addActionListener(this);
+
+        boldResultLabel = new JLabel();
+        add(boldResultLabel);
+
+        setSize(400, 200);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String result = message;
+        if (e.getSource() == toggleButton) {
+            result = toggleCase(message);
+            toggleResultLabel.setText(result);
+        } else if (e.getSource() == italicButton) {
+            result = "<html><i>" + message + "</i></html>";
+            italicResultLabel.setText(result);
+        } else if (e.getSource() == boldButton) {
+            result = "<html><b>" + message + "</b></html>";
+            boldResultLabel.setText(result);
+        }
+        resultLabel.setText(message);
+    }
+
+    private String toggleCase(String str) {
+        String toggledString = "";
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (Character.isUpperCase(c)) {
+                toggledString += Character.toLowerCase(c);
+            } else if (Character.isLowerCase(c)) {
+                toggledString += Character.toUpperCase(c);
+            } else {
+                toggledString += c;
+            }
+        }
+        return toggledString;
+    }
+
+    public static void main(String[] args) {
+        new StringOperations();
+    }
+}
+
+
+12. Write a Java Swing application to design the following menu driven sereen with one text box on which you will apply the given operations.
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class StringOperations extends JFrame implements ActionListener {
+    JTextArea inputField;
+    JMenu operationsMenu;
+    JMenuItem upperCaseItem, lowerCaseItem, sentenceCaseItem, toggleCaseItem;
+
+    public StringOperations() {
+        super("String Operations");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        inputField = new JTextArea();
+        inputField.setPreferredSize(new Dimension(200, 50));
+        inputField.setLineWrap(true);
+
+        JMenuBar menuBar = new JMenuBar();
+        operationsMenu = new JMenu("Operations");
+        upperCaseItem = new JMenuItem("Uppercase");
+        lowerCaseItem = new JMenuItem("Lowercase");
+        sentenceCaseItem = new JMenuItem("Sentence case");
+        toggleCaseItem = new JMenuItem("Toggle case");
+
+        upperCaseItem.addActionListener(this);
+        lowerCaseItem.addActionListener(this);
+        sentenceCaseItem.addActionListener(this);
+        toggleCaseItem.addActionListener(this);
+
+        operationsMenu.add(upperCaseItem);
+        operationsMenu.add(lowerCaseItem);
+        operationsMenu.add(sentenceCaseItem);
+        operationsMenu.add(toggleCaseItem);
+        menuBar.add(operationsMenu);
+
+        setJMenuBar(menuBar);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(inputField, BorderLayout.WEST);
+
+        JPanel resultPanel = new JPanel();
+        resultPanel.setLayout(new FlowLayout());
+        resultPanel.add(new JLabel("Result:"));
+        resultPanel.add(mainPanel);
+
+        add(resultPanel);
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        String result = inputField.getText();
+        if (e.getSource() == upperCaseItem) {
+            result = result.toUpperCase();
+        } else if (e.getSource() == lowerCaseItem) {
+            result = result.toLowerCase();
+        } else if (e.getSource() == sentenceCaseItem) {
+            result = toSentenceCase(result);
+        } else if (e.getSource() == toggleCaseItem) {
+            result = toggleCase(result);
+        }
+        inputField.setText(result);
+    }
+
+    private String toSentenceCase(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        StringBuilder sb = new StringBuilder(str.length());
+        boolean capitalize = true;
+        for (char c : str.toCharArray()) {
+            if (Character.isWhitespace(c)) {
+                capitalize = true;
+            } else if (capitalize) {
+                c = Character.toTitleCase(c);
+                capitalize = false;
+            }
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    private String toggleCase(String str) {
+        String toggledString = "";
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (Character.isUpperCase(c)) {
+                toggledString += Character.toLowerCase(c);
+            } else if (Character.isLowerCase(c)) {
+                toggledString += Character.toUpperCase(c);
+            } else {
+                toggledString += c;
+            }
+        }
+        return toggledString;
+    }
+
+    public static void main(String[] args) {
+        new StringOperations();
+    }
+}
+
+
+13. Write a Java Swing application to design the following menu driven screen with one text box on which you will apply the given operations.
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class TextStyler extends JFrame implements ActionListener {
+    JTextArea textArea;
+
+    JMenuItem boldMenuItem, italicMenuItem;
+
+    public TextStyler() {
+        super("Text Styler");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        textArea = new JTextArea();
+        textArea.setPreferredSize(new Dimension(200, 50));
+        textArea.setLineWrap(true);
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu styleMenu = new JMenu("Operations");
+        boldMenuItem = new JMenuItem("Bold");
+        italicMenuItem = new JMenuItem("Italic");
+
+        Font defaultFont = textArea.getFont();
+
+        boldMenuItem.addActionListener(this);
+        italicMenuItem.addActionListener(this);
+
+        styleMenu.add(boldMenuItem);
+        styleMenu.add(italicMenuItem);
+
+        menuBar.add(styleMenu);
+        setJMenuBar(menuBar);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(textArea, BorderLayout.CENTER);
+
+        JPanel resultPanel = new JPanel();
+        resultPanel.setLayout(new FlowLayout());
+        resultPanel.add(new JLabel("Result:"));
+        resultPanel.add(mainPanel);
+
+        add(resultPanel);
+
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        Font currentFont = textArea.getFont();
+        Font newFont = null;
+
+        if (e.getSource() == boldMenuItem) {
+            newFont = new Font(currentFont.getName(), Font.BOLD, currentFont.getSize());
+        } else if (e.getSource() == italicMenuItem) {
+            newFont = new Font(currentFont.getName(), Font.ITALIC, currentFont.getSize());
+        }
+
+        textArea.setFont(newFont);
+    }
+
+    public static void main(String[] args) {
+        new TextStyler();
+    }
+}
+
+
+14. Write a Java Applet to design the following graphics.(car using applet)
+
+
+import java.applet.*;
+import java.awt.*;
+
+/*<applet code="MyFirstApplet.class" width="200" height="200"></applet> */
+import java.awt.*;
+import java.applet.*;
+
+public class MyFirstApplet extends Applet {
+    public void paint(Graphics g) {
+        // set background color
+        setBackground(Color.white);
+
+        // draw yellow rectangle
+        g.setColor(Color.yellow);
+        g.fillRect(50, 50, 200, 100);
+
+        // draw two black wheels
+        g.setColor(Color.black);
+        g.fillOval(75, 130, 50, 50);
+        g.fillOval(175, 130, 50, 50);
+
+        // draw square on top left of rectangle
+        g.fillRect(20, 20, 50, 50);
+    }
+}
+
+15. Write a Java program to create 2 files FI and F2.Copy the contents of file FI by changing the case
+into file F2. F2 = F1. Also copy the contents of FI and F2 in F3. F3 = FI+F2. Display the contents of
+F3. Use Command Line Arguments.
+
+
+import java.io.*;
+
+public class FileCopy {
+
+    public static void main(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Usage: java FileCopy input_file output_file1 output_file2");
+            return;
+        }
+
+        String inputFile = args[0];
+        String outputFile1 = args[1];
+        String outputFile2 = args[2];
+        String outputFile3 = "F3.txt";
+
+        try {
+            // Create F1 and F2 files and copy the contents of F1 to F2 while changing its cases
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer1 = new BufferedWriter(new FileWriter(outputFile1));
+            BufferedWriter writer2 = new BufferedWriter(new FileWriter(outputFile2));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String upperLine = line.toUpperCase();
+                String lowerLine = line.toLowerCase();
+                writer1.write(upperLine + "\n");
+                writer2.write(lowerLine + "\n");
+            }
+            reader.close();
+            writer1.close();
+            writer2.close();
+
+            // Create F3 file and copy the contents of F1 and F2 to F3
+            BufferedWriter writer3 = new BufferedWriter(new FileWriter(outputFile3));
+            reader = new BufferedReader(new FileReader(outputFile1));
+            while ((line = reader.readLine()) != null) {
+                writer3.write(line + "\n");
+            }
+            reader.close();
+            reader = new BufferedReader(new FileReader(outputFile2));
+            while ((line = reader.readLine()) != null) {
+                writer3.write(line + "\n");
+            }
+            reader.close();
+            writer3.close();
+
+            // Display the contents of F3
+            reader = new BufferedReader(new FileReader(outputFile3));
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+16. Write a Java program to accept a number from the user and print it in words. (Max no.9999)
+Ex. I/P: 1551
+O/P: One Thousand Five Hundred and Fifty One
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class NumberToWords {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.print("Enter a number (max 9999): ");
+        int number = Integer.parseInt(reader.readLine());
+
+        if (number < 0 || number > 9999) {
+            System.out.println("Invalid number");
+        } else {
+            String[] ones = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+            String[] tens = {"", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+            String[] teens = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+
+            int thousands = number / 1000;
+            int hundreds = (number % 1000) / 100;
+            int tensAndOnes = number % 100;
+
+            if (thousands > 0) {
+                System.out.print(ones[thousands] + " thousand ");
+            }
+
+            if (hundreds > 0) {
+                System.out.print(ones[hundreds] + " hundred ");
+            }
+
+            if (tensAndOnes == 0) {
+                System.out.println("zero");
+            } else if (tensAndOnes < 10) {
+                System.out.println(ones[tensAndOnes]);
+            } else if (tensAndOnes < 20) {
+                System.out.println(teens[tensAndOnes - 10]);
+            } else {
+                int tensDigit = tensAndOnes / 10;
+                int onesDigit = tensAndOnes % 10;
+                System.out.println(tens[tensDigit] + " " + ones[onesDigit]);
+            }
+        }
+    }
+}
+
+
+
+17. Create an interface QueueOperation which has the methods related to all queue operations - Insert, Delete, isEmpty, isFull, display. Write a class which will provide the implementation of this interface using menu driven program. Accept the size of the queue from the user.
+
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+interface QueueOperation {
+    void insert(int element);
+    int delete();
+    boolean isEmpty();
+    boolean isFull();
+    void display();
+}
+
+class Queue implements QueueOperation {
+    int queue[];
+    int front, rear, size;
+    
+    Queue(int size) {
+        this.size = size;
+        queue = new int[size];
+        front = rear = -1;
+    }
+    
+    public void insert(int element) {
+        if(isFull()) {
+            System.out.println("Queue is full. Cannot insert element.");
+            return;
+        }
+        
+        if(front == -1) {
+            front = 0;
+        }
+        
+        rear++;
+        queue[rear] = element;
+        System.out.println(element + " inserted successfully.");
+    }
+    
+    public int delete() {
+        if(isEmpty()) {
+            System.out.println("Queue is empty. Cannot delete element.");
+            return -1;
+        }
+        
+        int deletedElement = queue[front];
+        if(front >= rear) {
+            front = rear = -1;
+        }
+        else {
+            front++;
+        }
+        return deletedElement;
+    }
+    
+    public boolean isEmpty() {
+        if(front == -1 || front > rear) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isFull() {
+        if(rear == size - 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    public void display() {
+        if(isEmpty()) {
+            System.out.println("Queue is empty. Cannot display elements.");
+            return;
+        }
+        
+        System.out.print("Queue elements: ");
+        for(int i=front; i<=rear; i++) {
+            System.out.print(queue[i] + " ");
+        }
+        System.out.println();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        Queue queue = null;
+        int choice, element;
+        
+        do {
+            System.out.println("***********MENU***********");
+            System.out.println("1. Insert element");
+            System.out.println("2. Delete element");
+            System.out.println("3. Check if queue is empty");
+            System.out.println("4. Check if queue is full");
+            System.out.println("5. Display queue elements");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+            
+            choice = Integer.parseInt(br.readLine());
+            
+            switch(choice) {
+                case 1:
+                    System.out.print("Enter the element to be inserted: ");
+                    element = Integer.parseInt(br.readLine());
+                    if(queue == null) {
+                        System.out.print("Enter the size of the queue: ");
+                        int size = Integer.parseInt(br.readLine());
+                        queue = new Queue(size);
+                    }
+                    queue.insert(element);
+                    break;
+                
+                case 2:
+                    int deletedElement = queue.delete();
+                    if(deletedElement != -1) {
+                        System.out.println(deletedElement + " deleted successfully.");
+                    }
+                    break;
+                
+                case 3:
+                    if(queue.isEmpty()) {
+                        System.out.println("Queue is empty.");
+                    }
+                    else {
+                        System.out.println("Queue is not empty.");
+                    }
+                    break;
+                
+                case 4:
+                    if(queue.isFull()) {
+                        System.out.println("Queue is full.");
+                    }
+                    else {
+                        System.out.println("Queue is not full.");
+                    }
+                    break;
+                
+                case 5:
+                    queue.display();
+                    break;
+                
+                case 6:
+                    System.out.println("Exiting the program.");
+
+                
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } while (choice != 6);
+    }
+}
+
+
+
+18. Create an interface Stack,Operation which has the methods related to all queue operations - Push, Pop, isEmpty, isFull, peek. Write a class which will provide the implementation of this interface using menu driven program. Accept the size of the stack from the user.
+
+
+
+import java.io.*;
+
+interface StackOperation {
+    void push(int element);
+    void pop();
+    boolean isEmpty();
+    boolean isFull();
+    void peek();
+}
+
+class Stack implements StackOperation {
+    private int top = -1;
+    private int[] stack;
+    private int size;
+
+    public Stack(int size) {
+        this.size = size;
+        stack = new int[size];
+    }
+
+    public void push(int element) {
+        if (!isFull()) {
+            stack[++top] = element;
+            System.out.println(element + " pushed to stack");
+        } else {
+            System.out.println("Stack is full");
+        }
+    }
+
+    public void pop() {
+        if (!isEmpty()) {
+            int element = stack[top--];
+            System.out.println(element + " popped from stack");
+        } else {
+            System.out.println("Stack is empty");
+        }
+    }
+
+    public boolean isEmpty() {
+        return top == -1;
+    }
+
+    public boolean isFull() {
+        return top == size - 1;
+    }
+
+    public void peek() {
+        if (!isEmpty()) {
+            System.out.println("Top element is " + stack[top]);
+        } else {
+            System.out.println("Stack is empty");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int size = Integer.parseInt(br.readLine());
+        Stack stack = new Stack(size);
+
+        int choice = 0;
+        while (choice != 5) {
+            System.out.println("\nStack Operations");
+            System.out.println("1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Check if stack is empty");
+            System.out.println("4. Check if stack is full");
+            System.out.println("5. Peek");
+            System.out.println("6. Exit");
+
+            System.out.print("Enter your choice: ");
+            choice = Integer.parseInt(br.readLine());
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the element to be pushed: ");
+                    int element = Integer.parseInt(br.readLine());
+                    stack.push(element);
+                    break;
+
+                case 2:
+                    stack.pop();
+                    break;
+
+                case 3:
+                    System.out.println("Is the stack empty? " + stack.isEmpty());
+                    break;
+
+                case 4:
+                    System.out.println("Is the stack full? " + stack.isFull());
+                    break;
+
+                case 5:
+                    stack.peek();
+                    break;
+
+                case 6:
+                    System.out.println("Exiting the program.");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice");
+            }
+        }
+    }
+}
+
+
+
+19. Write a Java program to design a screen using swings that will take a user name and password. If the user name and password are not same, raise an exception with appropriate message. User can have 3 login chances only. Use clear button to clear the text boxes.
+
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class LoginScreen extends JFrame implements ActionListener {
+
+    private JLabel label1, label2, result;
+    private JTextField username;
+    private JPasswordField password;
+    private JButton login, clear;
+    private int loginAttempts = 0;
+
+    public LoginScreen() {
+        setTitle("Login Screen");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+
+        label1 = new JLabel("Username:");
+        label1.setBounds(50, 50, 100, 30);
+        panel.add(label1);
+
+        label2 = new JLabel("Password:");
+        label2.setBounds(50, 100, 100, 30);
+        panel.add(label2);
+
+        username = new JTextField();
+        username.setBounds(150, 50, 150, 30);
+        panel.add(username);
+
+        password = new JPasswordField();
+        password.setBounds(150, 100, 150, 30);
+        panel.add(password);
+
+        login = new JButton("Login");
+        login.setBounds(50, 150, 100, 30);
+        login.addActionListener(this);
+        panel.add(login);
+
+        clear = new JButton("Clear");
+        clear.setBounds(200, 150, 100, 30);
+        clear.addActionListener(this);
+        panel.add(clear);
+
+        result = new JLabel();
+        result.setBounds(50, 200, 300, 30);
+        panel.add(result);
+
+        add(panel);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == login) {
+            String uname = username.getText();
+            String pass = new String(password.getPassword());
+
+            if (uname.equals(pass)) {
+                result.setText("Login successful!");
+            } else {
+                loginAttempts++;
+                if (loginAttempts == 3) {
+                    JOptionPane.showMessageDialog(this, "Login failed. You have exceeded the maximum number of login attempts.");
+                    dispose();
+                } else {
+                    result.setText("Invalid username or password. You have " + (3 - loginAttempts) + " attempts remaining.");
+                }
+            }
+        } else if (e.getSource() == clear) {
+            username.setText("");
+            password.setText("");
+            result.setText("");
+        }
+    }
+
+    public static void main(String[] args) {
+        new LoginScreen();
+    }
+}
+
+
+
+20. Write a program to animate following design.
+When user click on, the box above ON should filled with red color and ON is change to OFF.
+When user click on OFF, the box above OFF should filled with default color and OFF is change to
+ON.
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class RectangleAnimation extends JFrame implements ActionListener {
+
+    private JButton onButton;
+    private JPanel topRectPanel, bottomRectPanel;
+
+    private boolean isOn = false;
+
+    public RectangleAnimation() {
+        setTitle("Rectangle Animation");
+        setSize(300, 300);
+        setLayout(null);
+
+        topRectPanel = new JPanel();
+        topRectPanel.setBackground(Color.GRAY);
+        topRectPanel.setBounds(50, 50, 100, 100);
+
+        bottomRectPanel = new JPanel();
+        bottomRectPanel.setBounds(25, 175, 150, 50);
+
+        onButton = new JButton("ON");
+        onButton.addActionListener(this);
+        onButton.setBounds(25, 10, 100, 30);
+        onButton.setBackground(Color.LIGHT_GRAY);
+
+        bottomRectPanel.add(onButton);
+
+        add(topRectPanel);
+        add(bottomRectPanel);
+
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (isOn) {
+            topRectPanel.setBackground(Color.GRAY);
+            onButton.setText("ON");
+            isOn = false;
+        } else {
+            topRectPanel.setBackground(Color.RED);
+            onButton.setText("OFF");
+            isOn = true;
+        }
+    }
+
+    public static void main(String[] args) {
+        new RectangleAnimation();
+    }
+}
